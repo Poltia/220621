@@ -49,8 +49,35 @@ git 설치
 
 //    git push -u origin main 깃 저장소에 첫 커밋을 푸쉬
 
+cd "들어갈 폴더" : 경로 변경
+cd.. : 상위폴더로 이동
 
-git그래프
-.....
-dsdfds
+ls : 경로에 있는 파일 구조를 볼 수 있다.
+
+git 저장소가 초기화 된 경로인지 확인 잘하고 사용
+초기화경로는 git init을 한 경로
+
+// git push -u origin main 깃 저장소에 첫 커밋을 푸쉬
+
+소스제어 탭을 선택시 git 그래프에 변경사항중 파일이름 옆에
+U : 저장소에 없는 새로운 파일
+M : 저장소에 파일은 있고 내용이 변경 됐을때
+D : 저장소에 있는 파일이 제거됐을때
+
+1. git 설정
+    사용자 설정
+    git을 사용할때, 사용하는 깃의 사용자 세팅 (로컬상의 초기세팅)
+    git config --global user.name "본인 닉네임"
+    git config --global user.email "본인 이메일"
+
+    설정 정보 조회
+    git 설정이 제대로 되었는지 확인
+    git config --global --list
+
+    git 저장소 초기화 저장소 생성
+    git의 저장소로 지정할 경로로 이동해서
+    git init
+
+    git 저장소 복제 (파일 내려받기)
+    git clone (url)
 */
