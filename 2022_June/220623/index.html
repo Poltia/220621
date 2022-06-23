@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="gnb"></div>
+</body>
+<script src="mygnb.js"></script>
+<script>
+    // Gnb를 동적할당해서 객체를 생성.
+    // 생성된 객체는 _gnb에 들어있다.
+    //let _gnb = new Gnb();
+    let addListQnt = new makeList(3); 
+    console.log(addListQnt.list_count()+ "개");
+</script>
+</html>
