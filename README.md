@@ -22,3 +22,5 @@ let sample = Hi;
 
 ### 이미지 추가
 ![working_ryan](https://user-images.githubusercontent.com/107897852/174938371-09b9c4b0-e95a-4fa1-bbbd-73b04d8fdef8.gif)
+
+수정
