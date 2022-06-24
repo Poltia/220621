@@ -1,0 +1,24 @@
+#_box{
+    width: 630px;
+    padding: 15px;
+    display: flex;
+
+}
+fieldset{
+    width: 300px;
+    margin-bottom: 20px;
+    min-height: 200px;
+}
+.button_switch{
+    flex-direction: row-reverse;
+}
+.input_btn{
+    position: relative;
+    left: 210px;
+}
+#fld_name{
+    background-color: ivory;
+}
+#fld_work{
+    background-color: mintcream;
+}

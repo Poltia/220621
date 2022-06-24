@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>주문하기</h1>
+    <form action="">
+        <fieldset>
+            <legend>상품선택</legend>
+            <p><b>주문할 상품을 선택하세요</b></p>
+            <label>
+                <input type="checkbox" value="s1">사과
+                <input type="checkbox" value="s2">배
+                <input type="checkbox" value="f1">감
+                <input type="checkbox" value="f3">수박
+                        <!-- value:서버에 넘기는 값. 영어나 숫자만 가능
+                            선택지에는 반드시 들어가야함. -->
+                <p><b>포장여부</b></p>
+                <label><input type="radio" name="gift" value="yes">포장한다</label>
+                <label><input type="radio" name="gift" value="no">포장안한다</label>
+                        <!-- radio 속성에서 하나만 지정할 경우에는 name 값을 지정 -->
+            </label>
+        </fieldset>
+    </form>
+</body>
+</html>

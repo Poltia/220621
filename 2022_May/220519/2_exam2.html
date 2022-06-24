@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2</title>
+
+    <!-- 
+        박스모델에는 블록레벨요소, 인라인레벨요소
+        블록레벨 : 태그를 사용해 요소를 삽입했을때 혼자 한줄을 차지(너비=100%)
+                블록레벨요소의 좌우에 아무것도 둘 수 없다.
+        인라인레벨 : 콘텐츠 영역만 차지하고 나머지 공간에는 다른 요소가 들어간다.
+                한줄에 인라인 레벨 요소를 여러개 표시할 수 있다.
+
+
+        박스모델은 콘텐츠 영역, 박스와 콘텐츠사이의 여백을 패딩, 박스의 테두리를 보더,
+            여러 박스모델 사이의 여백을 마진... 등의 요소로 구성된다.
+
+        컨텐츠 사이의 간격이나 배치 등을 고려할 떄 필요한 개념(패딩, 마진)
+
+
+
+
+     -->
+     <style>
+         body * {
+             border: 1px solid blue;
+         }
+         .accent {
+             color: red;
+             font-weight: bold;
+         }
+     </style>
+</head>
+<body>
+    <!-- <h1>경일게임</h1>
+    <div>으라라ㅏ랑나<p class="accent">공부</p>열심히</div>
+    <p>해라<br>제발 ㅠㅠ</p> -->
+
+    <h1>경일게임</h1>
+    <div>으라라ㅏ랑나<span class="accent">공부</span>열심히</div>
+
+</body>
+</html>
+

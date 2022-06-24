@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="/20220530/02.main.js"></script>
+   
+    <h1>경일</h1>
+    <button id="btn">hihi</button>
+    <script>
+        const btn =document.getElementById("btn");
+        var student = {
+        name :"hong",
+        st:function(){
+            //이곳에서의 this는 버튼이 된다.
+            console.log(this);
+        }
+    }   
+    /* 클릭을 하면 student.st를 실행
+    btn.addEventListener('click',student.st);
+    
+    
+    
+    과제
+
+
+    */
+    </script>
+</body>
+</html>

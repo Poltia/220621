@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9</title>
+    <style>
+        /* 선택자 {속성1: 속성값1; 속성2: 속성값2 ...} */
+        /* p {
+            text-align: center;
+            color: red;
+        } */
+    </style> <!-- 내부스타일 시트 : 스타일을 같은 웹문서에 정리적용 -->
+
+    <link rel="stylesheet" href="css/style.css">
+     <!-- 외부스타일 시트 >> 별도 폴더링 후 외부의 스타일시트를 불러온다
+        헤드에 넣는 이유; 순차적으로 번역을 하는데, 불러들이기 좋게끔...? -->
+</head>
+<body>
+    <p>Hi~</p>
+    <h1 class="accent bg">한라봉</h1>
+    <!-- 인라인 스타일
+        간단한 스타일 정보
+        스타일 시트를 적용하지 않고 스타일을 직접 대상에 표시 -->
+    <p style="color:blue">한라봉 보단 귤이지! 난 귤이 좋앙 ㅋ</p>
+
+    <p>한라봉 보단 <span class="accent">귤</span>이지! 난 귤이 좋앙 ㅋ</p>
+    <p>한라봉 보단 귤이지! 난 귤이 좋앙 ㅋ</p>
+</body>
+</html>

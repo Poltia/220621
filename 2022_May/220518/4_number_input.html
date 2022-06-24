@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>주문하기</h1>
+    <form action="">
+        <fieldset>
+            <legend>상품선택</legend>
+            <p><b>선택선택</b></p>
+            <ul>
+                <li>
+                    <label><input type="checkbox" value="s3">사과</label>
+                    <!-- min:필드에 입력할 수 있는 최소값지정. 기본은0 -->
+                    <!-- max:필드에 입력할 수 있는 최대값지정. 기본은100 -->
+                    <input type="number" min="0" max="5" >개 (최대5개)
+                </li>
+                <li>
+                    <label><input type="checkbox" value="f3">배</label>
+                    <input type="number" min="0" max="3" value="1">개 (최대3개)
+                    <!-- 여기서 value 는 필드에 표시할 초기값 -->
+                </li>
+                <li>
+                    <label><input type="checkbox" value="p3">포도</label>
+                    <input type="range" min="0" max="5" value="2">개 (최대5개)
+                    <!-- range : 범위, 슬라이드바 -->
+                </li>
+            </ul>
+        </fieldset>
+    </form>
+</body>
+</html>

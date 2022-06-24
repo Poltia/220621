@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo list</title>
+    <style>
+        .field {
+            background-color: snow;
+            border: 1px solid lightgray;
+            width: 430px;
+            min-height: 200px;
+        }
+        .leg {
+            font-weight: bold;
+            font-style: italic;
+        }
+        #container {
+            font-style: italic;
+            color:darkblue;
+        }
+        ._removeBtn {
+            font-size: x-small;
+            font-weight: bold;
+            background-color: bisque;
+            border: 1px solid black;            
+        }
+        ._removeBtn:hover {
+            background-color: brown;
+        }
+        #_date, #_time, #_text {
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <fieldset class="field">
+        <legend class="leg">TO DO LIST</legend>
+        <ol id="container"></ol>
+    </fieldset>
+    <br>
+    <div class="_input">
+        <input id="_date" type="date">
+        <input id="_time" type="time">
+        <input id="_text" type="text" autofocus>
+        <button id="createBtn">추가</button>
+    </div>
+</body>
+<script>
+    createBtn.onclick = function() {
+        let list = {
+            texting : _text.value,
+            timing : _time.value,
+            dating : _date.value,
+        }
+        let el = document.createElement("li");
+      
+        el.innerHTML =list.dating +" "+ list.timing +" "+ list.texting;
+        el.className = "_list";
+
+        let removeBtn = document.createElement("button");
+        removeBtn.className = "_removeBtn"
+        removeBtn.innerHTML = "X";
+        removeBtn.onclick = function () {
+            container.removeChild(el);
+            container.removeChild(removeBtn);
+        }
+
+        container.appendChild(el);
+        container.appendChild(removeBtn);
+    }
+</script>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box"></div>
+    <input id="textBox" type="text" />
+    <input id="nameBox" type="text" />
+    <button id="viewBtn">출력</button>
+    <button id="changeBtn">교환</button>
+</body>
+<script>
+    // 전체를 담을 문자타입 변수
+    let text = "";
+
+    // 첫번째 input의 밸류를 담을 문자타입 변수
+    let firstValue = "";
+
+    // 두번째 input의 밸류를 담을 문자타입 변수
+    let secondValue = "";
+
+    // 출력 함수
+    function view() {
+
+        // 첫번째 input의 밸류를 firstValue변수에 담고
+        firstValue = textBox.value;
+        // 두번째 input의 밸류를 secondvalue변수에 담고
+        secondValue = nameBox.value;
+
+        // 클래스 box를 가지고 있는 태그에 firstValue, secondValue의 값을 담고
+        document.querySelector(".box").innerHTML = `${firstValue} ${secondValue}`;
+    }
+
+    // viewBtn을 가지고 있는 태그에 onclick 함수에 view 함수를 전달
+    viewBtn.onclick = view;
+
+    // 교환하는 함수
+    function change() {
+
+        // text 변수에 box에 담긴 전체 문자를 담아주고
+        text = document.querySelector(".box").innerHTML;
+
+        // RegExp 정규식 객체를 생성해서 (정규식 규칙, 플래그)
+        let reg = new RegExp(secondValue,"g");
+
+        // 탐색된 앞의 문자를 잡고 "$`"(앞의문자열) 123을 456으로 교체
+        text = text.replace(new RegExp(secondValue,"g"), "$`").replace(firstValue, secondValue);
+
+        // temp변수에 잠깐 저장
+        let temp = firstValue;
+
+        // 첫번째 변수에 두번째 변수 값을 넣고
+        firstValue = secondValue;
+
+        // 두번째 변수에 temp 변수 값을 넣고
+        secondValue = temp;
+
+        document.querySelector(".box").innerHTML = text;
+    }
+
+    // id changeBtn을 가지고 있는 태그의 onclick 함수에 change 함수를 전달
+    changeBtn.onclick = change;
+</script>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basket</title>
+    <link rel="stylesheet" href="basket.css">
+</head>
+<body>
+    <div class="scoreBoard">
+        <div class="scoreBoard inner">
+            <span>남은 횟수</span>
+            <span id="shots">10</span>
+        </div>
+        <div class="flex">
+            <div class="play-score">
+                <div class="pos">
+                    <div class="score-name">computer</div>
+                    <div class="computer-score">0</div>
+                </div>
+            </div>
+            <div class="play-score">
+                <div class="pos">
+                    <div class="score-name">player</div>
+                    <div class="player-score">0</div>
+                </div>
+            </div>
+        </div>
+        <p id="text">Player turn</p>
+        <button id="computer">Computer</button>
+        <!-- 어트리뷰트 disabled -->
+        <button id="user">Player</button>
+    </div>
+</body>
+<script src="basket.js"></script>
+</html>

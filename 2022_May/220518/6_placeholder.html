@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6</title>
+</head>
+<body>
+    <h1>펜션예약</h1>
+    <form action="">
+        <fieldset>
+            <legend>예약정보</legend>
+            <ul>
+                <li>
+                    <label for="user_name">이름</label>
+                    <input type="text" id="user_name" autofocus required>
+                    <!-- autofocus : 페이지가 열리면 커서가 깜빡이게됨 -->
+                </li>
+                <li>
+                    <label for="phone">전화번호</label>
+                    <input type="tel" id="phone" placeholder="번호만 입력하세요">
+                    <!-- placeholder : 입력필드에 힌트를 표시 -->
+                </li>
+            <!-- readonly : 읽기전용 필드로 만듬.
+                 required : 제출시 작성 여부 확인. 반드시 입력해야하는 내용에 넣는다.
+                 -->
+            </ul>
+            <label for="memo">메모</label>
+            <textarea id="memo" cols="30" rows="10"></textarea>
+            <!-- textarea : 텍스트영역 생성. 글자수(영문자기준)로 크기를 지정할수 있다. -->
+        </fieldset>
+    </form>
+</body>
+</html>

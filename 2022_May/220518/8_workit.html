@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프론트엔드 개발자 지원서</title>
+</head>
+<style>
+    body{
+        border : 2px solid black;
+        width : 470px;
+        padding : 30px;
+    }
+</style>
+<body>
+    <h1>개발자 지원서</h1>
+    사람이면 지원하세요.
+    <hr>
+    <dl>
+        <dt><p><b>개인정보</b></p></dt>
+        <dd>
+            <label for="user_name" required>이름</label>
+            <input type="text" id="user_name" placeholder="공백없이 입력하세요.">
+        </dd>
+        <dd>
+            <label for="phone" required>연락처</label>
+            <input type="tel" id="phone">
+        </dd>
+    </dl>
+    <dl>
+        <dt><p><b>지원 분야</b></p></dt>
+        <dd>
+            <label><input type="radio" name="field" value="front">프론트개발자</label>
+        </dd>
+        <dd>
+            <label><input type="radio" name="field" value="back">백엔드 개발자 개발</label>
+        </dd>
+        <dd>
+            <label><input type="radio" name="field" value="clean">청소부</label>
+        </dd>
+    </dl>
+    <p><b>지원 동기</b></p>
+    <textarea cols="60" rows="10" placeholder="본사 지원 동기를 간략히 써 주세요."></textarea>
+    <br>
+    <input type="submit" value="접수하기">
+    <button type="reset">다시쓰기</button>
+</body>
+</html>

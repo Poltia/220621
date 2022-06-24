@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10</title>
+
+    <!--
+        position 속성값
+        static : 문서의 흐름에 맞춰 배치한다. (default)
+        relative : 위치값을 지정할 수 있다는 점을 제외하면 static과 동일
+        absolute : relative 값을 사용한 상위요소를 기준으로 위치를 지정한다.
+        fixed : 브라우저 창을 기준으로 위치를 지정한다. 
+
+
+
+     -->
+
+     <style>
+         p {
+             width: 500px;
+             height: 100px;
+             background-color: aquamarine;
+         }
+
+         #static {
+            position: static;
+         }
+         #relative-1 {
+            position: relative;
+         }
+         #relative-2 {
+            position: relative;
+            left: 100px;
+            top: -50px;
+         }
+         #fixed {
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            position: fixed;
+            right: 30px;
+            top: 30px;
+         }
+     </style>
+</head>
+<body>
+    <p id="static">1어떤 생각을 일정한 형식에 따라 글자로 나타낸 것. 시·소설·수필·희곡 등을 비롯하여, 일기·편지·논설·신문 기사 등과 같이 일정한 내용을 담은 모든 기록을 두루 이르는 말임. 세는 단위는 줄·편.</p>
+    <p id="relative-1">2어떤 생각을 일정한 형식에 따라 글자로 나타낸 것. 시·소설·수필·희곡 등을 비롯하여, 일기·편지·논설·신문 기사 등과 같이 일정한 내용을 담은 모든 기록을 두루 이르는 말임. 세는 단위는 줄·편.</p>
+    <p id="relative-2">3어떤 생각을 일정한 형식에 따라 글자로 나타낸 것. 시·소설·수필·희곡 등을 비롯하여, 일기·편지·논설·신문 기사 등과 같이 일정한 내용을 담은 모든 기록을 두루 이르는 말임. 세는 단위는 줄·편.</p>
+    <p id="fixed"></p>
+</body>
+</html>

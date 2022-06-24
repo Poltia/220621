@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11</title>
+    <!-- 
+        글꼴을 지정
+        font-family
+     -->
+     <style>
+         body{
+             font-size: 20px; 
+             background: url("images/img.jpg") no-repeat fixed;
+             background-size: cover; /*  */
+         }
+         h1 {
+             font-size: 3em;
+             /* color: rgb(100, 100, 100) */
+             color: rgba(0, 0, 0, 1)
+             /* rgba : a=alpha -> 투명도 0~1 로 조절가능 */
+         }
+         .accent {
+             font-weight: 800;
+         }
+         .italic {
+             font-style: italic;
+         }
+         /* 
+         css style 에서 사용하는 단위
+         절대 크기 : px, pt
+         
+         상대 크기 : em,rem
+                    1em=16px
+                    *모바일환경을 고려해 상대크기를 주로 쓴다.
+         */
+         .color1 {
+             color: white;
+         }
+         .color2 {
+             color: purple;
+         }
+     </style>
+</head>
+<body>
+    <h1 class="color1">한라봉</h1>
+    <h1 class="color2">한라봉</h1>
+    <p>귤귤감귤</p>
+    <p>귤귤<span class="accent">감</span>귤귤</p>
+    <p class="italic"><span class="color1">귤귤감귤감귤</span></p>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2</title>
+    <link rel="stylesheet" href="2reset.css">
+    <link rel="stylesheet" href="2main.css">
+</head>
+<body>
+    <div class="nav">
+        <button>함바그</button>
+    </div>
+    <div id="slide"></div>
+</body>
+<script>
+    document.querySelector('.nav button').addEventListener('click',function() {
+        if(slide.classList.contains("active")) {
+            //"active"클래스가 있으면 제거
+            slide.classList.remove("active");
+        }
+        else {
+            //"active"클래스가 없으면 추가
+            slide.className += "active";
+        }
+        console.log(slide.classList.contains("active"));
+        //console.log(slide.classList.contains(클래스명) 클래스가 있으면 true 없으면 false
+    })
+</script>
+<script src="2main.js"></script>
+</html>

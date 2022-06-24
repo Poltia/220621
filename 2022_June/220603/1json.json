@@ -1,0 +1,46 @@
+{
+    "player":{
+        "user" :{
+            "id" :"순대",
+            "name":"무무",
+            "password":123
+        },
+        "user1" :{
+            "id" :"순대1",
+            "name":"무무1",
+            "password":1231
+        },
+        "user2" :{
+            "id" :"순대2",
+            "name":"무무2",
+            "password":12312
+        },
+        "user3" :{
+            "id" :"순대3",
+            "name":"무무3",
+            "password":123123
+        }
+    },
+    "player1":{
+        "user":{
+            "id":"마리",
+            "name":"찬",
+            "password":2
+        },
+        "user1":{
+            "id":"마리1",
+            "name":"찬1",
+            "password":23
+        },
+        "user2":{
+            "id":"마리2",
+            "name":"찬2",
+            "password":234
+        },
+        "user3":{
+            "id":"마리3",
+            "name":"찬3",
+            "password":2345
+        }
+    }
+}

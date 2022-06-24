@@ -1,0 +1,9 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+#content {
+    background: url("/images/img.jpg");
+    background-size: cover;
+}

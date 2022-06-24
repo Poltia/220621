@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 가입</title>
+</head>
+<style>
+    .box{
+        width: 250px;
+        height: 230px;
+        background-color: beige;
+    }
+    #_name{
+        margin: 20px 0px 0px 30px;
+    }
+    .info{
+        color: gray;
+        font-size: 12px;
+        margin: 0px 0px 15px 30px;
+    }
+    #_phone,#_mail{
+        margin-left: 30px;
+    }
+    #btn{
+        margin: 20px 0px 0px 30px;
+
+    }
+</style>
+<body>
+    <div class="box">
+        <input id="_name" type="text" placeholder="Name">
+        <div class="info">알파벳만 가능, 3자 이상 8자 이하 가능</div>
+        <input id="_phone"type="text" placeholder="Phone Number">
+        <div class="info">- 없이 번호만 입력</div>
+        <input id="_mail" type="text" placeholder="e-mail"><br>
+        <button id="btn">Sign Up</button>
+    </div>
+</body>
+<script src="signup.js"></script>
+</html>
