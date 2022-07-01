@@ -1,7 +1,7 @@
-import * as THREE from '/three.module.js'; // three.module.js 파일을 모듈 버전으로 불러옴
-import { OrbitControls } from '/OrbitControls.js';
-import { FontLoader } from "/FontLoader.js";
-import { TextGeometry } from "/TextGeometry.js";
+import * as THREE from '../THREE_JS/three.module.js'; // three.module.js 파일을 모듈 버전으로 불러옴
+import { OrbitControls } from '../THREE_JS/OrbitControls.js';
+import { FontLoader } from "../THREE_JS/FontLoader.js";
+import { TextGeometry } from "../THREE_JS/TextGeometry.js";
 
 class App {
     constructor() {
@@ -56,7 +56,7 @@ class App {
     _setupModel() {
         const fontLoader = new FontLoader();
         async function loadFont(that) {
-            const url = "/helvetiker_regular.typeface.json";
+            const url = "../THREE_JS/helvetiker_regular.typeface.json";
             const font = await new Promise((resolve, reject) => {
                 fontLoader.load(url, resolve, undefined, reject);
             });
