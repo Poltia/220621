@@ -40,7 +40,7 @@ class App {
             0.1,
             100
         );
-        camera.position.z = 3;
+        camera.position.z = 7;
         this._camera = camera;
     }
 
@@ -53,13 +53,37 @@ class App {
     }
 
     _setupModel() {
-        const material =new THREE.MeshPhongMaterial({
-            color: 0xff0000,
-            emissive: 0x00000,
-            specular: 0xffff00, //광원의 색상
-            shininess: 10, //반짝거리는 정도
-            flatShading: false,
-            wireframe: false
+        const textureLoader = new THREE.TextureLoader();
+        const map = textureLoader.load(
+            "../THREE_js/uv_grid_opengl.jpg",
+            texture => {
+                texture.repeat.x = 1;
+                texture.repeat.y = 1;
+
+                texture.wrapS = THREE.ClampToEdgeWrapping;
+                texture.wrapT = THREE.ClampToEdgeWrapping;
+
+                texture.offset.x = 0; //uv좌표의 시작위치 설정
+                texture.offset.y = 0;
+
+                texture.rotation = THREE.MathUtils.degToRad(0); //uv좌표 (0,0)을 기준으로 ()도만큼 반시계방향으로 돌림
+                texture.center.x = 0.5; //회전의 기준이 되는 uv좌표 설정. 기본은 0
+                texture.center.y = 0.5;
+
+                texture.magFilter = THREE.NearestFilter;
+                // minFilter의 종류. Mipmap이 선명도는 좋지만 연산이 많아 속도면에서 불리하기때문에 상황에 맞게 써야한다.
+                //texture.minFilter = THREE.NearestFilter;
+                //texture.minFilter = THREE.LinearFilter;
+                //texture.minFilter = THREE.NearestMipmapLinearFilter;
+                //texture.minFilter = THREE.NearestMipmapNearestFilter;
+                //texture.minFilter = THREE.LinearMipmapNearestFilter;
+                texture.minFilter = THREE.LinearMipmapLinearFilter;
+
+            }
+        );
+
+        const material = new THREE.MeshStandardMaterial({
+            map: map
         });
 
         const box = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), material);
