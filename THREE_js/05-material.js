@@ -40,7 +40,7 @@ class App {
             0.1,
             100
         );
-        camera.position.z = 7;
+        camera.position.z = 3;
         this._camera = camera;
     }
 
@@ -53,27 +53,22 @@ class App {
     }
 
     _setupModel() {
-        const vertices = [
-            -1, 1, 0,
-            1, 1, 0,
-            -1, -1, 0,
-            1, -1, 0,
-        ];
-
-        const geometry = new THREE.BufferGeometry();
-        geometry.setAttribute("position",
-            new THREE.Float32BufferAttribute(vertices, 3));
-            
-        const material = new THREE.LineDashedMaterial({
-            color: 0xffff00,
-            dashSize: 0.2, //그려짐
-            gapsize: 0.1, //안그려짐  반복
-            scale: 4  //대쉬 영역에 대한 표현 횟수
+        const material =new THREE.MeshPhongMaterial({
+            color: 0xff0000,
+            emissive: 0x00000,
+            specular: 0xffff00, //광원의 색상
+            shininess: 10, //반짝거리는 정도
+            flatShading: false,
+            wireframe: false
         });
 
-        const line = new THREE.LineLoop(geometry, material);
-        line.computeLineDistances();
-        this._scene.add(line);
+        const box = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), material);
+        box.position.set(-1, 0, 0);
+        this._scene.add(box);
+
+        const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.7, 32, 32), material);
+        sphere.position.set(1, 0, 0);
+        this._scene.add(sphere);
     }
 
     resize() {
