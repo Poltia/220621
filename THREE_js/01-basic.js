@@ -1,4 +1,4 @@
-import * as THREE from '/three.module.js'; // three.module.js 파일을 모듈 버전으로 불러옴
+import * as THREE from '../THREE_js/three.module.js'; // three.module.js 파일을 모듈 버전으로 불러옴
 
 class App {
     constructor() {
