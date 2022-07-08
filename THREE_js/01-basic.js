@@ -11,6 +11,9 @@ class App {
         this._renderer = renderer;
 
         const scene = new THREE.Scene();
+        //배경 색깔
+        scene.background = new THREE.Color(0x004fff);
+        //
         this._scene = scene;
 
         this._setupCamera();
