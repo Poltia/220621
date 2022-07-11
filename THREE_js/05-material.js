@@ -58,59 +58,37 @@ class App {
         this._camera.add(light);
     }
 
-    _setupModel() {
-        const textureLoader = new THREE.TextureLoader();
-        const mapAO = textureLoader.load("../THREE_js/imgs/glass/Glass_Window_002_ambientOcclusion.jpg");
-        const map = textureLoader.load("../THREE_js/imgs/glass/Glass_Window_002_basecolor.jpg");
-        const mapHeight = textureLoader.load("../THREE_js/imgs/glass/Glass_Window_002_height.png");
-        const mapMetalic = textureLoader.load("../THREE_js/imgs/glass/Glass_Window_002_metallic.jpg");
-        const mapNormal = textureLoader.load("../THREE_js/imgs/glass/Glass_Window_002_normal.jpg");
-        const mapAlpha = textureLoader.load("../THREE_js/imgs/glass/Glass_Window_002_opacity.jpg");
-        const mapRoughness = textureLoader.load("../THREE_js/imgs/glass/Glass_Window_002_roughness.jpg");
-        const mapLight = textureLoader.load("../THREE_js/imgs/light2.jpeg");
-
-        const material = new THREE.MeshStandardMaterial({
-            map: map,
-            normalMap: mapNormal,
-
-            displacementMap: mapHeight,
-            displacementScale: 0.2,
-            displacementBias: -0.15,
-
-            aoMap: mapAO,
-            aoMapIntensity: 1, //강도 조절. default: 1
-
-            roughnessMap: mapRoughness,
-            toughness: 0.5,  //강도 조절. default: 1
-
-            metalnessMap: mapMetalic,
-            metalness: 0.5,
-
-            alphaMap: mapAlpha,
-            transparent: true,
-            side: THREE.DoubleSide,
-
-            lightMap: mapLight,
-            lightMapIntensity: 2, //강도 조절. default: 1
-        });
-
-        const box = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1, 256, 256, 256), material);
-        box.position.set(-1, 0, 0);
-        box.geometry.attributes.uv2 = box.geometry.attributes.uv;
-        this._scene.add(box);
-/*
-        const boxHelper = new VertexNormalsHelper(box, 0.1, 0xffff00);
-        this._scene.add(boxHelper); //법선 벡터 시각화 */
-
-
-        const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.7, 512, 512), material);
-        sphere.position.set(1, 0, 0);
-        sphere.geometry.attributes.uv2 = sphere.geometry.attributes.uv;
-        this._scene.add(sphere);
-/*
-        const sphereHelper = new VertexNormalsHelper(sphere, 0.1, 0xffff00);
-        this._scene.add(sphereHelper); //법선 벡터 시각화 */
-    }
+        _setupModel() {
+            const vertices = [];
+          for (let i = 0; i < 10000; i++) {
+              const x = THREE.MathUtils.randFloatSpread(5);  //randFloatSpread(5) => -5~5까지의 난수
+              const y = THREE.MathUtils.randFloatSpread(5);
+              const z = THREE.MathUtils.randFloatSpread(5);
+        
+              vertices.push(x, y, z);
+          }
+        
+          const geometry = new THREE.BufferGeometry();
+          geometry.setAttribute(
+              "position",
+              new THREE.Float32BufferAttribute(vertices, 3)
+          );
+        
+          const sprite = new THREE.TextureLoader().load(
+              "../THREE_js/disc.png" );
+        
+          const material = new THREE.PointsMaterial({
+              map: sprite,
+              alphaTest: 0.5, //alphaTest 값보다 클때만 픽셀이 렌더링된다.
+              color: "#00ffff",
+              size: 0.1,
+              sizeAttenuation: true // true: 카메라 거리에 따라 크기가 달라짐
+          });
+        
+          const points = new THREE.Points(geometry, material);
+          this._scene.add(points);
+        }
+    
 
     resize() {
         const width = this._divContainer.clientWidth;
