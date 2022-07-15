@@ -1,8 +1,8 @@
 
 
-import * as THREE from '../THREE_js/three.module.js'; // three.module.js 파일을 모듈 버전으로 불러옴
-import { OrbitControls } from '../THREE_js/OrbitControls.js'; // 마우스로 화면 컨트롤 가능
-import { VertexNormalsHelper } from '../THREE_js/VertexNormalsHelper.js'
+import * as THREE from '../three.module.js'; // three.module.js 파일을 모듈 버전으로 불러옴
+import { OrbitControls } from '../OrbitControls.js'; // 마우스로 화면 컨트롤 가능
+import { VertexNormalsHelper } from '../VertexNormalsHelper.js'
 import { MathUtils } from 'three';
 
 class App {
@@ -77,7 +77,7 @@ class App {
         );
         
         const sprite = new THREE.TextureLoader().load(
-            "../THREE_js/disc.png" );
+            "../imgs/disc.png" );
         
         const material1 = new THREE.PointsMaterial({
             map: sprite,
