@@ -109,7 +109,7 @@ app.get("/insert", (req, res) => {
 
 app.post("/insert", (req, res) => {
   const data = req.body;
-  // body객체 안에 from에서 보내준 데이터는 input들의 name이 키값, 해당 input의 value값으로 전달된다.
+  // body객체 안에 form에서 보내준 데이터는 input들의 name이 키값, 해당 input의 value값으로 전달된다.
   const sql = "INSERT INTO products (name, number, series) VALUES (?, ?, ?)";
   temp.query(sql, [data.name, data.number, data.series], () => {
     // url 경로를 redirect()의 매개변수 경로로 이동한다.
@@ -119,6 +119,41 @@ app.post("/insert", (req, res) => {
   // console.log(data);
 });
 
+app.post("/delete", (req, res) => {
+  const sql = "DELETE FROM products WHERE id = '" + req.body.id + "'";
+  temp.query(sql, (err, del) => {
+    if (err) console.log(err);
+    else {
+      res.redirect("/");
+    }
+  });
+});
+
+app.get("/update", (req, res) => {
+  fs.readFile("src/update.html", "utf-8", (err, data) => {
+    res.send(data);
+  });
+});
+
+app.post("/update", (req, res) => {
+  const data = req.body;
+  const sql =
+    "UPDATE products SET name = " +
+    data.name +
+    ", number = " +
+    data.number +
+    ", series = " +
+    data.series +
+    " WHERE id ='" +
+    data.id +
+    "'";
+  temp.query(sql, (err, update) => {
+    if (err) console.log(err);
+    else {
+      res.redirect("/");
+    }
+  });
+});
 /*
 app.get("/insert", (req, res) => {
   res.send("list page");
