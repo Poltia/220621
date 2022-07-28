@@ -8,6 +8,14 @@
     <style>
         .line {
             overflow: hidden;
+            display: flex;
+        }
+        .line div {
+            border-radius: 3px;
+            width: 30px;
+            height: 30px;
+            margin: 2px;
+            text-align: center;
         }
         .seat {
             margin: 2px;
@@ -31,6 +39,8 @@
 </head>
 <body>
     <div>1시 버스</div>
+    <div><a href="/2">2시 버스</a></div>
+    <div><a href="/3">3시 버스</a></div>
 </body>
 <!-- <script src="/myjs/bus_script.js"></script> -->
 <script>
@@ -45,7 +55,6 @@ socket.on("reserve", (data) => {
 // 초기 좌석 생성
 $(window).ready(function(){
     const onClickSeat = function(){
-
         if($(this).hasClass("disable")){
             return;
         }
@@ -63,9 +72,10 @@ $(window).ready(function(){
     };
     $.getJSON('/seats', {dummy : new Date().getTime()}, (data) => {
         $.each(data, (indexY, line) => {
-
             let $line = $("<div></div>").addClass("line");
             $.each(line, (indexX, seat) => {
+                //const indexX_ = indexX+1;
+                //const indexY_ = indexY+1;
                 let $output = $("<div></div>", {
                     class : "seat",
                     "data-x" : indexX,
