@@ -15,6 +15,7 @@ https://www.npmjs.com/
 const express = require("express");
 const socketio = require("socket.io");
 const fs = require("fs");
+const ejs = require("ejs");
 
 // express만 -----------------------------
 // 서버의 몸체가 되는 객체가 만들어짐
@@ -33,7 +34,7 @@ const io = socketio(server);
 // --------------------------------------
 
 app.get("/", (req, res) => {
-    fs.readFile("page.html", "utf-8", (err, data) => {
+    fs.readFile("whisper/page.html", "utf-8", (err, data) => {
         // 문제 없이 파일 읽기가 처리되었으면 err는 null
         console.log("readFile err = "+err);
         res.send(data);
@@ -42,8 +43,9 @@ app.get("/", (req, res) => {
 
 // 클라이언트가 접속 했을 때
 io.on("connection", (socket) => {
-    console.log(socket);
+    //console.log(socket);
     console.log("유저 접속");
+    console.log(socket.id);
 
     socket.on("joinRoom", (room, name) => {
         //join(방이름) : 방 개념으로 접속 시켜주는 함수
@@ -61,6 +63,10 @@ io.on("connection", (socket) => {
 
     socket.on("chat", (room, name, msg) => {
         io.to(room).emit("chat", name, msg);
+    });
+
+    socket.on("whisper", (id, name, msg) => {
+        io.to(id).emit("whisper", (id, name, msg));
     });
 });
 // ** html에 script태그로

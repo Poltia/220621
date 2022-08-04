@@ -43,6 +43,14 @@
             padding: 10px;
             width: 10%;
         }
+        #whisper_send {
+            display: none;
+            background-color: bisque;
+            border: none;
+            box-sizing: border-box;
+            padding: 10px;
+            width: 10%;
+        }
 
         #messages {
             list-style-type: none;
@@ -90,8 +98,14 @@
             </select>
             <ul id="messages"></ul>
             <div id="send">
+                <select id="whisper">
+                    <option value="<%= socket.id[0] %>"></option>
+                    <option value="<%= socket.id[1] %>"></option>
+                    <option value="<%= socket.id[2] %>"></option>
+                </select>
                 <input id="msg">
                 <button id="sendbtn">보내기</button>
+                <button id="whisper_send">귓속말 보내기</button>
             </div>
         </div>
     </div>
@@ -142,6 +156,25 @@
 
             sendbtn.onclick = function() {
                 socket.emit("chat", room, name, msg.value);
+                msg.value = "";
+            };
+
+            whisper.onchange = function(e) {
+                let el = e.target;
+                console.log(el.selectedIndex)
+                sendbtn.style.display = "none";
+                whisper_send.style.display = "block";
+            }
+            let id = whisper.options[whisper.selectedIndex].value;
+            socket.on("whisper", (id, name, msg) => {
+                messages.innerHTML +=`
+                <li>
+                    ${name}님께서 ${id}님에게 : ${msg}
+                </li>
+                `;
+            });
+            whisper_send.onclick = function() {
+                socket.emit("whisper", id, name, msg.value);
                 msg.value = "";
             };
         };
