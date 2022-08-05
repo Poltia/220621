@@ -27,7 +27,7 @@ let counter = 0;
 // 생성자 함수
 function Product(name, image, price, count) {
     // 번호가 증가 할 수 있도록 증감 연산자 사용 count++
-    this,index = counter++;
+    this.index = counter++;
     this.name = name;
     this.omage = image;
     this.price = price;
@@ -46,8 +46,6 @@ const products = [
     new Product("비타민", "/", 2000, 20),
     new Product("커피", "/", 2000, 20)
 ];
-
-console.log();
 
 const PORT = 3000;
 const server = app.listen(PORT, () => {
@@ -77,5 +75,61 @@ app.get("/shop", (req, res) => {
     // fs.readFileSync("shop.html", "utf-8"); 이렇게 쓰고 반환값을 받으면
     // html 파일을 읽어서 utf-8 인코딩하고 반환 해준다.
     const page = fs.readFileSync("shop.html", "utf-8");
-    res.send(page);
+    res.send(
+        ejs.render(page, {
+            products : products,
+        })
+    );
+});
+
+let cart = [];
+// 소켓 이벤트 연결
+// connection : 클라이언트가 접속했을때
+io.on("connection", (socket) => {
+    // 상품 구매 취소했을때 돌리는 함수
+    function onReturn(index){
+        // 물건의 갯수를 되돌린다. 더해준다.
+        products[index].count++;
+        // 물건을 제거
+        delete cart[index]; //배열 안의 값제거 delete 배열[인덱스]
+
+        let count = products[index].count;
+        io.emit("count", {
+            index,
+            count,
+        });
+    }
+
+    // 이벤트 연결 웹소켓이 가지고 있는 이벤트
+    socket.on("cart", (index) => {
+        // 물건의 갯수를 감소
+        products[index].count--;
+        // 빈객체를 하나 만들어서 해당 배열의 엔덱스 자리에 넣고
+        cart[index] = {};
+        // 해당 배열의 인덱스 자리에 있는 객체에 index 키를 추가하고 밸류를 넣어준다.
+        cart[index].index = index;
+        
+        let count = products[index].count;
+        io.emit("count", {
+            index,
+            count,
+        });
+    });
+
+    // 구매 했을때 이벤트 연결
+    socket.on("buy", (index) => {
+        // 카트의 해당 상품 인덱스 제거
+        delete cart[index];
+        
+        let count = products[index].count;
+        io.emit("count", {
+            index,
+            count,
+        })
+    });
+
+    // 상품 구매를 취소했을때
+    socket.on("return", (index) => {
+        onReturn(index);
+    });
 });
