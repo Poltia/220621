@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pop up</title>
+</head>
+<body>
+    <h1>광고</h1>
+    <p>
+        24시간동안 안보기 <button id="popCloseBtn">x</button>
+    </p>
+</body>
+<script src="../app.js"></script>
+<script>
+    popCloseBtn.onclick = function(){
+        let value = "cookie is running";
+        createCookie("popup_close", value, 1);
+        window.close();
+    }
+</script>
+</html>
