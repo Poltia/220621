@@ -83,21 +83,21 @@ crypto.randomBytes(32, function(err, byte) {
 계산량을 늘려서 값 출력을 임의적으로 느리게 만드는 방법
 
 암호화 모듈들
-pbkdf, scrypto, bcrypto 세가지 방법이 있는데,
-bcrypto를 많이 사용하는 편이다.
+pbkdf, scrypt, bcrypt 세가지 방법이 있는데,
+bcrypt를 많이 사용하는 편이다.
 
 pbkdf
 해시함수의 컨테이너 역할을 하고
 해시함수에 salt를 적용해서 해시함수의 반복횟수를 지정해서 암호화 할 수 있고
 IOS표준에 적합하며 NIST에서 승인된 알고리즘이다.
 
-scrypto
+scrypt
 강력하지만 많은 메모리와 CPU를 사용해 역효과가 날 수 있다. 부하가 걸릴 수 있다.
 오프라인 공격(서버로의 직접적인 공격)에 많이 강력하지만 자원을 많이 써서 위험하다.
 OpenSSL 1.1 이상을 제공하는 시스템에서만 사용 가능.
 주어진 자원에서 공격자가 사용할 수 있는 병렬 처리양이 한정되어 있다.
 
-bcrypto
+bcrypt
 보안으로 유명한 OpenBSD에서 사용하고
 .NET 및 자바를 포함한 많은 플랫폼 언어에서도 사용할 수 있다.
 반복횟수를 늘려 연산속도를 늦출 수 있고, 연산능력이 증가해도 공격에 대비를 할 수 있다.
@@ -122,7 +122,7 @@ crypto.randomBytes(32, function (err, byte) {
 const createSalt = () => {
     // 암호화를 처리하는데 시간이 걸리기 때문에
     // Promise를 사용해서 비동기 처리를 한다.
-    new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         // 랜덤 바이트 생성. 길이가 64
         crypto.randomBytes(64, (err, byte) => {
             if (err) {
@@ -139,10 +139,50 @@ const createSalt = () => {
 // 비밀번호를 해싱 해주는 함수
 const pwHashed = (userId, password) => {
     // Promise를 이용해서 비동기 처리
-    new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
+        // users 테이블에서 user_id의 값이 있는지 확인
+        const sql = "SELECT * FROM users WHERE user_id=?;"
+        // 쿼리문 실행. 유저아이디를 찾고
+        client.query(sql, [userId], async(err, result) => {
+            // 결과가 값이 있으면
+            if (result[0]?.salt) {
+                // 여기서 결과값은 해당 유저의 객체이고, 그안에 salt값을 가져온다.
+                const salt = await result[0].salt;
+                // pbkdf2 암호화를 하는데 해싱 알고리즘은 sha512
+                // 반복횟수: 543432, 길이:64
+                crypto.pbkdf2(password, salt, 543432, 64, "sha512", (err, key) => {
+                    if (key.toString("base64") == result[0].password) {
+                        resolve(key.toString("base64"));
+                    } else {
+                        reject("err");
+                    }
+                });
+            } else {
+                reject("err");
+            }
+        });
+    });
+};
 
+const createPwHashed = (password) => {
+    // 비동기 처리
+    return new Promise(async(resolve, reject) => {
+        const salt = await createSalt(); // 여기서 salt값을 뽑고
+        // 여기서 543432 만큼 반복시키는게 키스트레칭
+        // 비밀번호에 문자를 더해서 암호화시키는 기법, salt 사용
+        // 여기서 salt는 랜덤바이트함수로 만들어낸 랜덤값이다.
+        crypto.pbkdf2(password, salt, 543432, 64, "sha512", (err, key) => {
+            if (err) {
+                reject("err");
+            } else {
+                // 비밀번호마다 교유의 salt값을 가지고 있게 하기위해서
+                // 암호화한 비밀번호와 salt값을 둘다 데이터베이스에 저장함
+                resolve({password: key.toString("base64"), salt});
+            }
+        })
     })
 }
+
 
 /* 간단 암호화된 로그인을 만들어보자
 사용할 모듈
@@ -157,16 +197,49 @@ const express = require("express");
 const mysql = require("mysql2");
 const fs = require("fs");
 
+const app = express();
+
+app.use(express.urlencoded({ extended : false }));
+
 const client = mysql.createConnection({
     user: "root",
     password: "12345678",
     database: "test8",
     multipleStatements: true
 });
+/*
+const sql = `CREATE TABLE users (id INT AUTO_INCREMENT PRIMARY KEY, user_id VARCHAR(255), password VARCHAR(255), salt VARCHAR(255))`
+client.query(sql);
+*/
+app.get("/", (req, res) => {
+    fs.readFile("view/join.html", "utf-8", (err, data) => {
+        res.send(data);
+    });
+});
 
-const app = express();
+app.get("/login", (req, res) => {
+    fs.readFile("view/login.html", "utf-8", (err, data) => {
+        res.send(data);
+    });
+});
 
-app.use(express.urlencoded({ extended : false }));
+app.post("/join", async (req, res) => {
+    const {password, salt} = await createPwHashed(req.body.user_pw);
+    const sql = "INSERT INTO users (user_id, password, salt) VALUES (?, ?, ?);"
+    client.query(sql, [req.body.user_id, password, salt], () => {
+        res.redirect("/login");
+    });
+});
+
+app.post("/login", (req, res) => {
+    const {user_id, user_pw} = req.body;
+    pwHashed(user_id, user_pw).then((result) => {
+        res.send(result + "로그인 됨");
+    })
+    .catch((err) => {
+        res.send(err);
+    });
+});
 
 const PORT = 3000;
 app.listen(PORT, () => {

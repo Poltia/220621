@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1</title>
+</head>
+<body>
+    <form action="/login" method="post">
+        <!-- 요청 보냈을때 body 객체 안에
+        user_id, user_pw의 키값으로 input의 값이 전달된다. -->
+        <input type="text" name="user_id" placeholder="ID"><br>
+        <input type="text" name="user_pw" placeholder="Password"><br>
+        <button>로그인</button><br>
+        <button><a href="/">회원가입</a></button>
+    </form>
+</body>
+</html>
