@@ -1,5 +1,5 @@
 /** mysql 편하게 쓰기
- * swquelize 와 FOREIGN KEY 사용
+ * sequelize 와 FOREIGN KEY 사용
  * 관계형 데이터베이스 만들어보기
  * 
  * 사용할 모듈

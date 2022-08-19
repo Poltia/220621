@@ -1,10 +1,11 @@
+
 const Sequelize = require("sequelize");
 
 // sequelize 모듈을 확장한 user클래스
 class User extends Sequelize.Model {
     // init()에서 테이블을 설정해준다.
     static init(sequelize) {
-        // super.ini()의 첫번째 매개변수는 테이블 컬럼에 대한 설정, 두번째는 테이블 자체의 설정
+        // super.init()의 첫번째 매개변수는 테이블 컬럼에 대한 설정, 두번째는 테이블 자체의 설정
         return super.init({
             name : {
                 type : Sequelize.STRING(50),
