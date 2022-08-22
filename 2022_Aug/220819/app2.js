@@ -23,7 +23,7 @@ app.set("views", path.join(__dirname, "view")); // __dirname : 현재 파일까�
     // fs모듈로 파일을 가져오고 //
     res.send(ejs.render(data,{e}));
 });*/
-// 을 생략 가능하게 함?
+// html의 뷰엔진을 ejs랜더링 방식으로 바꾼다.
 app.engine("html", ejs.renderFile);
 
 // view engine을 html을 랜더링할 때 사용하겠다고 설정
@@ -97,6 +97,57 @@ app.post("/create_post", (req, res) => {
         });
     })
 })
+
+app.get("/view/:name", (req, res) => {
+    // 해당 유저의 이름을 조회하고
+    User.findOne({
+        where : {
+            // 누구를 찾을 건지
+            // params로 전달받은 name키값에 있는 밸류로 이름을 검색
+            name : req.params.name
+
+        },
+        // 리턴값을 단일 객체로 변형해서 보여준다.
+        //raw : true,
+        
+        // 관계형 모델 불러오기
+        // include로 관계를 맺어놓은 모델을 조회할 수 있다.
+        // user모델의 id가 1번이면 post모델의 user_id키가 같은 것들을 조회
+        include : [{
+            // post 모델을 조회
+            model : Post
+        }]
+    }).then((e) => {
+        e.dataValues.Posts = e.dataValues.Posts.map((i) => i.dataValues);
+        const Posts = e.dataValues;
+        res.render("view", { data : Posts });
+    });
+});
+
+app.post("/view_updata", (req, res) => {
+    const { id, msg, text } = req.body;
+    console.log(id, msg, text);
+    // 수정 쿼리문 사용. 객체가 들어가는데
+    // 첫번째 매개변수 객체는 수정할 내용,
+    // 두번째 매개변수 객체는 검색조건
+    Post.update(
+        { msg : msg },
+        { // 검색 조건 내용은 아이디와 메시지 둘 다 맞는 것을 탐색
+            where : { id : id, msg : text }
+        }
+    );
+});
+
+app.get("/del/:id", (req, res) => {
+    // 삭제 쿼리문. 매개변수 객체 내용은 검색조건
+    Post.destroy({
+        // 검색은 전달받은 params의 안에 있는 id 키값
+        where : { id : req.params.id }
+    }).then(() => {
+        // 성공시. 유저페이지로 이동
+        res.redirect("/user");
+    });
+});
 
 // 서버 연결
 const PORT = 3001;

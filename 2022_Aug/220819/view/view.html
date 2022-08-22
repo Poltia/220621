@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    작성자 : <%= data.name %>
+    <ul>
+        <% data.Posts.forEach(function(post){ %>
+        <li class="item" data-item="<%= post.id %>">
+            <p class="text"><%= post.msg %></p>
+            <input type="text" class="msg"><button class="item-btn">수정</button>
+            <a class="view-btn" href="/del/<%= post.id %>">삭제</a>
+        </li>
+        <% }) %>
+    </ul>
+</body>
+<script>
+    // html이 다 불러와졌을때
+    window.onload = function() {
+        let items = document.querySelectorAll(".item");
+        items.forEach((e, index) => {
+            e.querySelector(".item-btn").onclick = function() {
+                // data 속성사용. js에서 값을 가져다 쓰기 위해서
+                let id = e.dataset.item;
+                // 수정할 내용을 가진 msg input의 value를 가져와서 담고
+                let msg = e.querySelector(".msg").value;
+                // 수정하기 전 내용도 담아준다.
+                let text = e.querySelector(".text").innerHTML;
+                // 제이쿼리 안에 있는 azax함수 사용
+                $.ajax({
+                    // 요청 url
+                    url : "/view_updata",
+                    // 요청 type
+                    type : "post",
+                    // type이 post면 전달할 data값
+                    data : {id, msg, text}
+                });
+                location.href = "/user";
+            }
+        })
+    }
+</script>
+</html>
