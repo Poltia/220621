@@ -21,11 +21,11 @@ class User extends _sequelize.Model {
                     type : _sequelize.STRING(20), // 컬럼의 데이터 타입
                     // Null 을 허용하는지 여부 (빈값이어도 되는지 여부).
                     allowNull : false,
-                    // 기본키
+                    // 기본키. primaryKey
                     // 중복되지 않는 키
                     // 기본키는 컬럼에 하나는 무조건 있어야한다.
                     //primaryKey : true,
-                    // 고유키
+                    // 고유키. unique
                     // 여기서는 컬럼의 name값이 중복되지 않게.
                     // 없어도 상관 없다.
                     // ex)주민번호나 전화번호 같이 겹치지 않는 값들

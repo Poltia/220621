@@ -1,6 +1,6 @@
 
 // 사용할 모듈
-// express ejs dotenv sequelizw mysql2 (내장모듈 path) 개발용 nodemon
+// express ejs dotenv sequelize mysql2 (내장모듈 path) 개발용 nodemon
 // path : 기본경로를 다룰수 있게 도와주는 모듈
 
 const express = require("express");
