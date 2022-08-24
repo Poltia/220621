@@ -1,6 +1,6 @@
 /* sequelize
 sezuelize를 사용하는 이유는?
-ORM (object relational maaing, 객체 관계 매핑)
+ORM (object relational mapping, 객체 관계 매핑)
 
 웹에서 가장 기본적인 디자인패턴
 MVC패턴 (Model Viewfile Controler)

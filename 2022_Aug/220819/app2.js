@@ -105,7 +105,6 @@ app.get("/view/:name", (req, res) => {
             // 누구를 찾을 건지
             // params로 전달받은 name키값에 있는 밸류로 이름을 검색
             name : req.params.name
-
         },
         // 리턴값을 단일 객체로 변형해서 보여준다.
         //raw : true,
