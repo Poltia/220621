@@ -73,7 +73,7 @@ app.use(session({
     secret : process.env.SESSION_KEY,
     // 세션을 저장하고 불러올 때 세션을 다시 저장할지 여부
     resave : false,
-    // 세션에 저장할 때 초시화 여부를 설정
+    // 세션에 저장할 때 초기화 여부를 설정
     saveUninitialized : true,
 }))
 
