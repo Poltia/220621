@@ -1,0 +1,12 @@
+.com {
+  width: 200px;
+  height: 200px;
+  border: 1px solid;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.App{
+  display: flex;
+}
