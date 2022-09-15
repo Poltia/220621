@@ -1,7 +1,7 @@
 // App.css 파일 가져오는 구문ㄱ
 import './App.css';
-// import Mycom from './compnents/Mycom'
-import Calendar from './compnents/Calendar';
+// import Mycom from './components/Mycom'
+import Calendar from './components/Calendar';
 
 function App() {
   return (
@@ -12,10 +12,17 @@ function App() {
     //   <Mycom name="무무" age="3살" cName="four" />
     // </div>
     <div className='body'>
-      <h1> September </h1>
+      <h1>September</h1>
       <br />
       <div className='App'>
-        <Calendar />
+        <Calendar date="Sun" day="day" color="red" />
+        <Calendar date="Mon" day="day" />
+        <Calendar date="Tue" day="day" />
+        <Calendar date="Wed" day="day" />
+        <Calendar date="Thu" day="day" />
+        <Calendar date="Fri" day="day" />
+        <Calendar date="Sat" day="day" color="blue" />
+        <Calendar color="red" />
         <Calendar />
         <Calendar />
         <Calendar />
@@ -49,7 +56,7 @@ function App() {
         <Calendar date="28" />
         <Calendar date="29" />
         <Calendar date="30" />
-        <Calendar />
+        <Calendar color="blue" />
       </div>
     </div>
   );

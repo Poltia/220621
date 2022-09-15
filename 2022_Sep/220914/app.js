@@ -52,7 +52,7 @@ how? 자바스크립트가 바꿔주는 것.
 우리가 다른 페이지로 이동할 때 마다 html, css, js 파일을 다 불러왔는데, 그럴필요가 없다. (새로고침도 필요없는 이유)
 
 편리한 익스텐션
-es7 react/redux/graphQL/react-native snippents
+es7+ react/redux/graphQL/react-native snippents
 우리가 리액트로 작업을 하면서 리액트 키워드를 사용할 수 있게 도와준다.
 rafce 
 
