@@ -35,9 +35,18 @@ function App() {
     if (num.length === 5) break;
   }
   console.log(num)
+
+  for (let k=0; k<25; k++) {
+    for (let l=0; l<5; l++) {
+      if (arr[k] === num[l]) {
+        arr.splice(k, 1, "bomb");
+      }
+    }
+  }
+  console.log(arr);
   return (
     <div className='body'>
-      {arr.map((el) => (<Box num={el} random={num} key={el} />))}
+      {arr.map((el, index) => (<Box num={el} key={index} />))}
     </div>
   )
 }

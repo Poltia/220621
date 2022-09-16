@@ -20,7 +20,7 @@ const Block = ({num}) => {
         console.log("클릭")
         count++
         setnum(num1 + 1);
-        //비도익적으로 돌아가기 때문에 콘솔이 값이 변하기전에 동작해서 바뀌기 전 값이 출력된다.
+        //비동기적으로 돌아가기 때문에 콘솔이 값이 변하기전에 동작해서 바뀌기 전 값이 출력된다.
         console.log(num1);
     }
   return (

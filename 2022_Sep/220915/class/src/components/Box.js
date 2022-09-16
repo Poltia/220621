@@ -1,13 +1,8 @@
 import React from 'react'
 
-const Box = ({num, random}) => {
-    for (let i=0; i<5; i++) {
-        if (num === random[i]) {
-            
-        }
-    }
+const Box = ({num}) => {
   return (
-    <div className={'box '}>
+    <div className={'box '+num}>
 
     </div>
   )
