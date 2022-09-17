@@ -1,0 +1,47 @@
+
+.App {
+  display: flex;
+  width: 100%;
+}
+
+.left {
+  width: 50%;
+}
+.left:nth-child(1) {
+  font-size: 100px;
+  text-align: center;
+}
+
+.right {
+  width: 50%;
+}
+.right:nth-child(2) {
+  font-size: 100px;
+  text-align: center;
+}
+
+.com_rtc > img {
+  width: 100%;
+}
+
+.com_rock {
+  display: none;
+}
+
+.com_paper {
+  display: none;
+}
+
+.com_scissors {
+  display: none;
+}
+
+.user_rock, .user_paper, .user_scissors{
+  width: 30%;
+  position: relative;
+  left: 33%;
+}
+
+.right > div > img {
+  width: 100%;
+}
