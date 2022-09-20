@@ -14,4 +14,5 @@
 리액트 라우터 라는 라이브러리가 해주는 일..
  ..다운로드 링크
 https://reactrouter.com/en/v6.3.0
+npm install react-router-dom@6
 */
