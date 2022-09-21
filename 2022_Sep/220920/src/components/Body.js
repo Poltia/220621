@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const Body = ({ path, name, item }) => {
+const Body = ({ path, name, item, isLogin }) => {
    // Link : 리액트에서 <a>같은 역할을 한다.
    // Link 컴포넌트를 이용해서 경로를 바꿔주고 컴포넌트를 교체해서 보여준다.
    // 라우터간의 이동을 할 수 있게 도와준다.
@@ -25,6 +25,7 @@ const Body = ({ path, name, item }) => {
          >
             {name}로 이동
          </button>
+         {isLogin ? <div>로그인 됨</div> : <div>로그인 안됨</div>}
       </div>
    );
 };
