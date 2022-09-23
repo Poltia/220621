@@ -1,20 +1,12 @@
-import { Fragment } from "react";
+import React, { useState } from "react";
+import { EventPractice } from "./components";
 
 function App() {
-  const name = "리액트";
-  return (
-    <div
-      style={{
-        backgroundColor: "black", // background-color -> backgroundColor
-        color: "aqua",
-        fontSize: "48px", // font-size -> fontSize
-        fontWeight: "bold", // font-weight -> fontWeight
-        padding: 16, // 단위를 생략하면 px로 지정됩니다.
-      }}
-    >
-      {name}
-    </div>
-  );
+    return (
+        <div>
+            <EventPractice />
+        </div>
+    );
 }
 
 export default App;
