@@ -118,11 +118,7 @@ function App() {
                 <Route
                     path="/post"
                     element={
-                        <Post
-                            list={list}
-                            indexNum={indexNum}
-                            profile={profile}
-                        />
+                        <Post list={list} indexNum={indexNum} writer={writer} />
                     }
                 />
                 <Route

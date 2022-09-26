@@ -23,7 +23,9 @@ const Write = ({
     function writing() {
         setWriter(user);
         const name = user.id;
-        setList([...list, { title, write, name }]);
+        console.log(user);
+        const profile = user.profile;
+        setList([...list, { title, write, name, profile }]);
         nav("/board");
         return;
     }

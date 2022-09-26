@@ -1,8 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../components";
+import { default_img } from "../imgs";
 
-const Post = ({ list, indexNum, profile }) => {
+const Post = ({ list, indexNum, writer }) => {
     const nav = useNavigate();
     return (
         <>
@@ -16,7 +17,14 @@ const Post = ({ list, indexNum, profile }) => {
                             </div>
                             <div className="post_writer">
                                 <div className="profile_img">
-                                    <img src={profile} alt="profile" />
+                                    <img
+                                        src={
+                                            list[indexNum].profile == undefined
+                                                ? default_img
+                                                : list[indexNum].profile
+                                        }
+                                        alt="profile"
+                                    />
                                 </div>
                                 <div>글쓴이 : {list[indexNum].name}</div>
                             </div>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Header } from "../components";
-import { chan1, chan2, chan3 } from "../imgs";
+import { chan1, chan2, chan3, default_img } from "../imgs";
 
 const Mypage = ({ user, setUser, users, profile, setProfile }) => {
     const pw = user.password;
@@ -18,12 +19,15 @@ const Mypage = ({ user, setUser, users, profile, setProfile }) => {
     //     setProfile(e.target.value);
     // };
 
+    const nav = useNavigate();
+
     const id = user.id;
     function change() {
         for (let i = 0; i < users.length; i++) {
             if (users[i].id == id) {
                 setUser(users.splice(i, 1));
                 setUser([...users, { id, password, email, profile }]);
+                nav("/");
                 return;
             }
         }
@@ -46,7 +50,12 @@ const Mypage = ({ user, setUser, users, profile, setProfile }) => {
                 <div className="mypage">
                     <div className="profile">
                         <div>
-                            <img src={profile} alt="프로필 이미지" />
+                            <img
+                                src={
+                                    profile == undefined ? default_img : profile
+                                }
+                                alt="프로필 이미지"
+                            />
                         </div>
                         {/* <input type="file" onChange={img_input} /> */}
                         <div onClick={profile_change1}>사진1</div>
