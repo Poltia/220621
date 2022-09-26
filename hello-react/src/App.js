@@ -1,12 +1,15 @@
-import React, { useState } from "react";
-import { EventPractice } from "./components";
+import React, { Component } from "react";
+import { ValidationSample } from "./components";
+import "./App.css";
 
-function App() {
-    return (
-        <div>
-            <EventPractice />
-        </div>
-    );
+class App extends Component {
+    render() {
+        return (
+            <div>
+                <ValidationSample />
+            </div>
+        );
+    }
 }
 
 export default App;
