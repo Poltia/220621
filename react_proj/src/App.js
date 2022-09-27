@@ -104,7 +104,8 @@ function App() {
                     path="/write"
                     element={
                         <Write
-                            user={login_user}
+                            login_user={login_user}
+                            setLogin_user={setLogin_user}
                             setWrite={setWrite}
                             setTitle={setTitle}
                             setWriter={setWriter}

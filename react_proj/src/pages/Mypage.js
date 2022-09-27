@@ -27,7 +27,7 @@ const Mypage = ({ user, setUser, users, profile, setProfile }) => {
             if (users[i].id == id) {
                 setUser(users.splice(i, 1));
                 setUser([...users, { id, password, email, profile }]);
-                nav("/");
+                nav("/login");
                 return;
             }
         }

@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Header } from "../components";
 
 const Write = ({
-    user,
+    setLogin_user,
+    login_user,
     setTitle,
     setWrite,
     setWriter,
@@ -21,10 +22,10 @@ const Write = ({
 
     const nav = useNavigate();
     function writing() {
-        setWriter(user);
-        const name = user.id;
-        console.log(user);
-        const profile = user.profile;
+        setWriter(login_user);
+        const name = login_user.id;
+        console.log(login_user);
+        const profile = login_user.profile;
         setList([...list, { title, write, name, profile }]);
         nav("/board");
         return;
