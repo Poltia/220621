@@ -31,7 +31,7 @@ useDispatch (리액트 훅 함수)
 컴포넌트가 Action을 보내고 Reducer로 전달받고 store의 값을 최신화 해준다.
 
 Action: 동작할 기능의 이름, 행동
-Reduce: 함수로, 사용할 동작들을 조건문으로 모아둔 곳
+Reducer: 함수로, 사용할 동작들을 조건문으로 모아둔 곳
 store: state값을 저장해 둘 객체 라고 생각하면 된다.
 
 컴포넌트가 무엇을 동작할지 Action 행동을 무엇을 할지를 Reducer로 보내고 store(저장소)의 값을 바꿔준다.
@@ -52,7 +52,9 @@ npm install redux //리덕스 코어 설치
 
 redux는 리액트에서'만' 쓸 수 있는게 아니라 리액트'도' 사용할 수 있다.
 
+
 리액트에서 react-redux 라이브러리로 편하게 사용할 수 있다.
+https://react-redux.js.org/introduction/getting-started
 
 설치 명령어
 npm install react-redux //리액트 리덕스
