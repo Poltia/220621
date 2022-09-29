@@ -43,10 +43,10 @@ const Button = styled.button`
 
 const StyledComponent = () => {
     return (
-        <box color="black">
-            <button>안녕하세요</button>
-            <button inverted={true}>테두리만</button>
-        </box>
+        <Box color="black">
+            <Button>안녕하세요</Button>
+            <Button inverted={true}>테두리만</Button>
+        </Box>
     );
 };
 
