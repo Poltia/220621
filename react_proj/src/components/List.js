@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 const List = ({ list, index, setIndexNum }) => {
     console.log("index : ", index);
     const nav = useNavigate();
+    
     function post() {
         setIndexNum(index);
         nav(`/post/?=${index}`);
