@@ -1,8 +1,19 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { main_img, board_img, signup_img, login_img } from "../imgs";
+import { main_img, board_img, signup_img, login_img, logout } from "../imgs";
 
 const Header = () => {
+    const dispatch = useDispatch();
+    const loginIs = useSelector((state) => state.loginis);
+
+    const Logout = () => {
+        if (loginIs == true) {
+            dispatch({ type: "LOGIN_IS", payload: false });
+            alert("로그아웃 되었습니다.");
+        }
+    };
+
     return (
         <div className="header">
             <div className="return_main">
@@ -20,6 +31,9 @@ const Header = () => {
                 <Link to="/login">
                     <img src={login_img} alt="로그인으로" />
                 </Link>
+                {/* <div className="logout" onClick={Logout}>
+                    <img src={logout} alt="Logout" />
+                </div> */}
                 <Link to="/signup">
                     <img src={signup_img} alt="회원가입으로" />
                 </Link>

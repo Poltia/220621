@@ -6,6 +6,7 @@ import chan1 from "./chan.jpeg";
 import chan2 from "./chan2.jpeg";
 import chan3 from "./chan3.jpeg";
 import default_img from "./default.png";
+import logout from "./logout.png";
 
 export {
     main_img,
@@ -16,4 +17,5 @@ export {
     chan2,
     chan3,
     default_img,
+    logout,
 };

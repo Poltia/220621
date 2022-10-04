@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../components";
 import { chan1, chan2, chan3, default_img } from "../imgs";
@@ -18,6 +18,19 @@ const Mypage = () => {
     const email_input = (e) => {
         setEmail(e.target.value);
     };
+    const [profile, setProfile] = useState(login_user.profile);
+    useEffect(() => {
+        console.log("사진변경 " + profile);
+    }, [profile]);
+    const profile_change1 = () => {
+        setProfile(chan1);
+    };
+    const profile_change2 = () => {
+        setProfile(chan2);
+    };
+    const profile_change3 = () => {
+        setProfile(chan3);
+    };
     // const img_input = (e) => {
     //     setProfile(e.target.value);
     // };
@@ -28,23 +41,13 @@ const Mypage = () => {
             if (users[i].id == id) {
                 users.splice(i, 1);
                 dispatch({
-                    type: "CHANGE_INFO",
-                    payload: [...users, { id, password, email }],
+                    type: "CHANGE_MY_INFO",
+                    payload: [...users, { id, password, email, profile }],
                 });
                 nav("/login");
                 return;
             }
         }
-    }
-
-    function profile_change1() {
-        dispatch({ type: "CHANGE_PROFILE", payload: chan1 });
-    }
-    function profile_change2() {
-        dispatch({ type: "CHANGE_PROFILE", payload: chan2 });
-    }
-    function profile_change3() {
-        dispatch({ type: "CHANGE_PROFILE", payload: chan3 });
     }
 
     return (
@@ -64,9 +67,24 @@ const Mypage = () => {
                             />
                         </div>
                         {/* <input type="file" onChange={img_input} /> */}
-                        <div onClick={profile_change1}>사진1</div>
-                        <div onClick={profile_change2}>사진2</div>
-                        <div onClick={profile_change3}>사진3</div>
+                        <div
+                            className="profile_change"
+                            onClick={profile_change1}
+                        >
+                            사진1
+                        </div>
+                        <div
+                            className="profile_change"
+                            onClick={profile_change2}
+                        >
+                            사진2
+                        </div>
+                        <div
+                            className="profile_change"
+                            onClick={profile_change3}
+                        >
+                            사진3
+                        </div>
                     </div>
                     <div className="change">
                         <div className="myid">

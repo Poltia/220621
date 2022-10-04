@@ -28,8 +28,6 @@ const Login = () => {
                 } else if (e.password != password) {
                     alert("비밀번호를 확인해주세요.");
                 }
-            } else if (e.id != id) {
-                alert("아이디를 확안해주세요");
             }
         });
     };

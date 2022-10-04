@@ -60,6 +60,9 @@ a {
 .members img {
   width: 50px;
 }
+.logout {
+  cursor: pointer;
+}
 
 
 
@@ -129,6 +132,9 @@ a {
 .profile>div>img {
   width: 400px;
   height: 400px;
+}
+.profile_change {
+  cursor: pointer;
 }
 
 .change>div>p>div:first-child {
@@ -205,6 +211,94 @@ a {
 .board>button{
   position: absolute;
   right: 50px;
+  bottom: 20px;
+  font-size: 30px;
+  border-radius: 20%;
+}
+
+
+
+/* Write > body */
+
+.write{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+}
+.write>*{
+  margin: 10px;
+}
+.write_title {
+  font-size: 40px;
+  width: 1000px;
+}
+.write_inner {
+  font-size: 25px;
+  height: 500px;
+  overflow: scroll;
+}
+.write_btns {
+  display: flex;
+  justify-content: space-between;
+}
+.write_btns>* {
+  font-size: 20px;
+  padding: 5px;
+  margin: 0 100px;
+}
+
+
+
+/* Post > body */
+
+.post {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1000px;
+  height: 650px;
+  border: 3px solid mediumaquamarine;
+  border-radius: 30px;
+}
+.post_inner {
+  position: relative;
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%);
+  width: 90%;
+  max-height: 550px;
+  overflow: scroll;
+}
+
+.post_info {
+  font-size: 25px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+.post_writer{
+  display: flex;
+}
+.post_writer>.profile_img>img {
+width: 40px;
+height: 40px;
+margin-right: 5px;
+}
+
+.post_write {
+  height: 480px;
+  font-size: 18px;
+  margin-top: 20px;
+  border: 1px solid darkgray;
+}
+
+.back_btn {
+  position: absolute;
+  left: 50px;
   bottom: 20px;
   font-size: 30px;
   border-radius: 20%;

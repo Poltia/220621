@@ -1,9 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Header, List } from "../components";
 
 const Board = () => {
     const nav = useNavigate();
+    const list = useSelector((state) => state.post_list);
     return (
         <>
             <Header />
@@ -21,14 +23,9 @@ const Board = () => {
                             </tr>
                         </thead>
                         <tbody className="brd_table_body">
-                            {/* {list.map((el, index) => (
-                                <List
-                                    key={index}
-                                    index={index}
-                                    list={el}
-                                    setIndexNum={setIndexNum}
-                                />
-                            ))} */}
+                            {list.map((el, index) => (
+                                <List key={index} index={index} list={el} />
+                            ))}
                         </tbody>
                     </table>
                     <button

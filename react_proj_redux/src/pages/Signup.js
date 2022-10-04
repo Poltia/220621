@@ -39,6 +39,7 @@ const Signup = () => {
                     profile: null,
                 },
             });
+            console.log(id + " 회원가입완료");
             nav("/login");
         }
     };
