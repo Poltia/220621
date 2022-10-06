@@ -16,7 +16,7 @@ axios({
 })*/
 function App() {
     const dispatch = useDispatch();
-    
+
     const [name, setName] = useState("");
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
@@ -38,8 +38,8 @@ function App() {
     };
 
     const logout = () => {
-      dispatch(logins.logout())
-    }
+        dispatch(logins.logout());
+    };
 
     return (
         <div className="App">
@@ -80,7 +80,14 @@ function App() {
             <br />
             <button onClick={login}>로그인</button>
             <div>로그인 됨?</div>
-            {isLogin ? <div>응 {userName}<button onClick={logout}>로그아웃</button></div> : <div>아니</div>}
+            {isLogin ? (
+                <div>
+                    응 {userName}
+                    <button onClick={logout}>로그아웃</button>
+                </div>
+            ) : (
+                <div>아니</div>
+            )}
         </div>
     );
 }
