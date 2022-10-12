@@ -29,4 +29,16 @@ const Content = styled.div`
     }
 `;
 
-export { HeaderWrap, ContentsWrap, Content };
+const User = styled.div`
+    cursor: pointer;
+    width: 80px;
+    border-radius: 20px;
+    padding: 10px 0;
+    &:hover {
+        color: gray;
+        background-color: white;
+        transition: 0.3s;
+    }
+`;
+
+export { HeaderWrap, ContentsWrap, Content, User };

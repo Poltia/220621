@@ -13,7 +13,7 @@ const SignupWrap = styled.div`
     input {
         width: 350px;
         height: 45px;
-        font-size: 25px;
+        font-size: 20px;
         margin-bottom: 20px;
     }
     button {

@@ -1,8 +1,20 @@
+
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { HeaderWrap, ContentsWrap, Content } from "../styles/HeaderStyle";
+import { loginAction } from "../redux/middleware/loginAction";
+import { HeaderWrap, ContentsWrap, Content, User } from "../styles/HeaderStyle";
 
 const Header = () => {
     const nav = useNavigate();
+    const dispatch = useDispatch();
+
+    const logout = () => {
+        dispatch(loginAction.logout());
+        alert("로그아웃 되었습니다.");
+    };
+
+    const isLogin = useSelector((state) => state.login.isLogin);
+    const userID = useSelector((state) => state.login.id);
 
     return (
         <HeaderWrap>
@@ -14,10 +26,17 @@ const Header = () => {
             </ContentsWrap>
             <ContentsWrap>
                 <Content>문의</Content>
-                <Content>My</Content>
-                <Content onClick={() => nav("/login")}>로그인</Content>
-                <Content onClick={() => nav("/signup")}>회원가입</Content>
-                <Content>로그아웃</Content>
+                {isLogin ? (
+                    <>
+                        <User onClick={() => nav("/mypage")}>{userID}</User>
+                        <Content onClick={logout}>로그아웃</Content>
+                    </>
+                ) : (
+                    <>
+                        <Content onClick={() => nav("/login")}>로그인</Content>
+                        <Content onClick={() => nav("/signup")}>회원가입</Content>
+                    </>
+                )}
             </ContentsWrap>
         </HeaderWrap>
     );

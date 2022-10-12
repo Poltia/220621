@@ -1,6 +1,5 @@
 let init = {
     id: "",
-    password: "",
     isLogin: false,
 };
 
@@ -9,16 +8,12 @@ function reducer(state = init, action) {
     switch (type) {
         case "LOGIN":
             return {
-                ...state,
                 id: payload.id,
-                password: payload.password,
                 isLogin: true,
             };
         case "LOGOUT":
             return {
-                ...state,
-                id: payload.id,
-                password: payload.password,
+                id: "",
                 isLogin: false,
             };
         default:

@@ -5,19 +5,19 @@ class User extends Sequelize.Model {
         return super.init(
             {
                 user_id: {
-                    type: Sequelize.STRING(20),
+                    type: Sequelize.STRING(225),
                     allowNull: false,
                     unique: true,
                 },
-                user_password: {
-                    type: Sequelize.STRING(20),
+                password: {
+                    type: Sequelize.STRING(225),
                     allowNull: false,
                 },
-                Phone: {
+                phone: {
                     type: Sequelize.INTEGER,
                     allowNull: false,
                 },
-                Email: {
+                email: {
                     type: Sequelize.STRING(20),
                     allowNull: false,
                 },
