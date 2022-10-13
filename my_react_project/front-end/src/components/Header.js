@@ -1,4 +1,3 @@
-
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginAction } from "../redux/middleware/loginAction";
@@ -20,9 +19,16 @@ const Header = () => {
         <HeaderWrap>
             <Content onClick={() => nav("/")}>메인</Content>
             <ContentsWrap>
-                <Content>패키지</Content>
-                <Content>항공</Content>
-                <Content>호텔</Content>
+                <Content
+                    onClick={() => {
+                        nav("/package");
+                    }}
+                >
+                    패키지
+                </Content>
+                <Content onClick={() => nav("/air")}>항공</Content>
+                <Content onClick={() => nav("/hotel")}>호텔</Content>
+                <Content onClick={() => nav("/review")}>후기</Content>
             </ContentsWrap>
             <ContentsWrap>
                 <Content>문의</Content>

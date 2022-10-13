@@ -20,6 +20,7 @@
     "sass": "^1.55.0",
     "sequelize": "^6.24.0",
     "styled-components": "^5.3.6",
+    "swiper": "^6.8.4",
     "thunk": "^0.0.1",
     "web-vitals": "^2.1.4"
   },

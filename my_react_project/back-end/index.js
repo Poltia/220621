@@ -31,18 +31,30 @@ app.post("/login", async (req, res) => {
     let { id, password } = req.body;
     const users = await User.findOne({
         where: { user_id: id },
-    })
-        .then((e) => {
+    }).then((e) => {
+        if (e) {
             bcrypt.compare(password, e.password, (err, same) => {
                 if (same) {
                     console.log(id + " 로그인");
                     res.send(true);
-                }
+                } else res.send(false);
             });
-        })
-        .catch(() => {
+        } else {
             res.send(false);
-        });
+        }
+    });
+});
+
+// 아이디 중복체크 //
+app.post("/idcheck", async (req, res) => {
+    let { id } = req.body;
+    const idcheck = await User.findOne({
+        where: { user_id: id },
+    }).then((e) => {
+        if (e) {
+            res.send(true);
+        } else res.send(false);
+    });
 });
 
 // 회원가입 //

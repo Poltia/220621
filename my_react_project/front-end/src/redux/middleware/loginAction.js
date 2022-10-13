@@ -1,15 +1,16 @@
 import axios from "axios";
 
-function login(id, password) {
+function login(id, password, nav) {
     return async (dispatch, getState) => {
         const user = await axios({
             method: "post",
             url: "http://localhost:8000/login",
             data: { id, password },
         });
-        console.log(user.data);
         if (user.data) {
             dispatch({ type: "LOGIN", payload: { id } });
+            nav("/");
+            alert("로그인 성공");
         } else {
             alert("로그인 실패");
         }
