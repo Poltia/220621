@@ -1,8 +1,11 @@
 const express = require("express");
+const session = require("express-session");
 const cors = require("cors");
 const { sequelize, User } = require("./public");
 const bcrypt = require("bcrypt");
-
+const jwt = require("jsonwebtoken");
+const dot = require("dotenv");
+dot.config();
 // 서버 객체 생성
 const app = express();
 
@@ -24,7 +27,54 @@ const options = {
 // 전달받은 객체 형태를 해석해서 사용할 수 있게하는 설정
 app.use(express.json());
 
+// 세션 사용준비
+app.use(
+    session({
+        secret: process.env.SESSION_KEY,
+        resave: false,
+        saveUninitialized: true,
+    })
+);
+
 app.use(cors(options));
+
+// 토큰 확인하는 미들웨어 함수
+const check_token = (req, res, next) => {
+    const { access_token, refresh_token, id } = req.session;
+    // access_token 확인
+    jwt.verify(access_token, process.env.ACCESS_TOKEN_KEY, (err, acc_decoded) => {
+        if (err) {
+            // access_token이 만료 되었으면
+            jwt.verify(
+                refresh_token,
+                process.env.REFRESH_TOKEN_KEY,
+                (err, ref_decoded) => {
+                    if (err) {
+                        console.log("refresh token 불량");
+                    } else {
+                        // DB에 refresh token 확인
+                        User.findOne({
+                            where: { user_id: id },
+                        }).then((e) => {
+                            if (e?.refresh_token === refresh_token) {
+                                // refresh token이 정상(똑같)이면 ㄱ
+                                const access_token = jwt.sign(
+                                    { user_id: ref_decoded.user_id },
+                                    process.env.ACCESS_TOKEN_KEY,
+                                    { expiresIn: "1d" }
+                                );
+                                req.session.access_token = access_token;
+                                next();
+                            }
+                        });
+                    }
+                }
+            );
+        } else {
+            next();
+        }
+    });
+};
 
 // 로그인 //
 app.post("/login", async (req, res) => {
@@ -37,6 +87,35 @@ app.post("/login", async (req, res) => {
                 if (same) {
                     console.log(id + " 로그인");
                     res.send(true);
+                    // access token 발급
+                    const access_token = jwt.sign(
+                        { user_id: id },
+                        process.env.ACCESS_TOKEN_KEY,
+                        { expiresIn: "1h" }
+                    );
+                    // refresh token 발급
+                    const refresh_token = jwt.sign(
+                        { user_id: id },
+                        process.env.REFRESH_TOKEN_KEY,
+                        { expiresIn: "1d" }
+                    );
+                    // DB에 refresh token 저장
+                    User.update(
+                        // 바꿀 내용의 객체
+                        {
+                            refresh_token: refresh_token,
+                        },
+                        // 찾을 곳의 객체
+                        {
+                            where: { user_id: id },
+                        }
+                    );
+                    // 세션에 각 토큰값을 할당. express-session에 저장
+                    req.session.access_token = access_token;
+                    req.session.refresh_token = refresh_token;
+                    req.session.id = id;
+                    // console.log("access token : " + access_token);
+                    // console.log("refresh token : " + refresh_token);
                 } else res.send(false);
             });
         } else {

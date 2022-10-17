@@ -1,3 +1,5 @@
+// dotenv 불러오기
+
 const config = {
     dev: {
         username: "root",
