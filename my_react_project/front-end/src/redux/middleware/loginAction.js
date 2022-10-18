@@ -1,14 +1,20 @@
 import axios from "axios";
 
-function login(id, password, nav) {
+function login(id, password, nav, setCookie, removeCookie) {
     return async (dispatch, getState) => {
+        let duration = new Date();
+        const time = 1;
+        duration.setTime(duration.getTime() + time * 24 * 60 * 60 * 1000);
         const user = await axios({
             method: "post",
             url: "http://localhost:8000/login",
             data: { id, password },
         });
-        if (user.data) {
+        if (user.data.isLogin) {
             dispatch({ type: "LOGIN", payload: { id } });
+            sessionStorage.setItem("accessToken", user.data.session.access_token);
+            const refresh_token = user.data.session.refresh_token;
+            setCookie("refreshToken", refresh_token, { path: "/", expires: duration });
             nav("/");
             alert("로그인 성공");
         } else {
@@ -20,6 +26,8 @@ function login(id, password, nav) {
 function logout() {
     return (dispatch, getState) => {
         dispatch({ type: "LOGOUT" });
+        sessionStorage.removeItem("accessToken");
+        // removeCookie("refreshToken");
     };
 }
 

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { SignupWrap } from "../styles/SignupStyle";
 import { Title, Button } from "../styles/CommonStyle";
 import { loginAction } from "../redux/middleware/loginAction";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ setCookie, removeCookie }) => {
     // input.value 받아오기
     const [id, setId] = useState("");
     const idInput = (e) => {
@@ -22,7 +22,7 @@ const Login = () => {
 
     // 로그인 실행 함수
     const login = () => {
-        dispatch(loginAction.login(id, password, nav));
+        dispatch(loginAction.login(id, password, nav, setCookie, removeCookie));
     };
 
     // enter 키로 로그인 함수 실행하기

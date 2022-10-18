@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dot = require("dotenv");
 dot.config();
+
 // 서버 객체 생성
 const app = express();
 
@@ -19,10 +20,12 @@ sequelize
         console.log(error);
     });
 
+// 리액트 포트 연결
 const options = {
     // 허용 해줄 주소 ㄱ
     origin: "http://localhost:3000",
 };
+app.use(cors(options));
 
 // 전달받은 객체 형태를 해석해서 사용할 수 있게하는 설정
 app.use(express.json());
@@ -35,8 +38,6 @@ app.use(
         saveUninitialized: true,
     })
 );
-
-app.use(cors(options));
 
 // 토큰 확인하는 미들웨어 함수
 const check_token = (req, res, next) => {
@@ -65,7 +66,7 @@ const check_token = (req, res, next) => {
                                 );
                                 req.session.access_token = access_token;
                                 next();
-                            }
+                            } // else {다르면??}
                         });
                     }
                 }
@@ -85,8 +86,6 @@ app.post("/login", async (req, res) => {
         if (e) {
             bcrypt.compare(password, e.password, (err, same) => {
                 if (same) {
-                    console.log(id + " 로그인");
-                    res.send(true);
                     // access token 발급
                     const access_token = jwt.sign(
                         { user_id: id },
@@ -99,23 +98,21 @@ app.post("/login", async (req, res) => {
                         process.env.REFRESH_TOKEN_KEY,
                         { expiresIn: "1d" }
                     );
-                    // DB에 refresh token 저장
-                    User.update(
-                        // 바꿀 내용의 객체
-                        {
-                            refresh_token: refresh_token,
-                        },
-                        // 찾을 곳의 객체
-                        {
-                            where: { user_id: id },
-                        }
-                    );
+                    // // DB에 refresh token 저장
+                    // User.update(
+                    //     // 바꿀 내용의 객체
+                    //     {refresh_token: refresh_token},
+                    //     // 찾을 곳의 객체
+                    //     {where: { user_id: id }}
+                    // );
                     // 세션에 각 토큰값을 할당. express-session에 저장
                     req.session.access_token = access_token;
                     req.session.refresh_token = refresh_token;
                     req.session.id = id;
                     // console.log("access token : " + access_token);
                     // console.log("refresh token : " + refresh_token);
+                    console.log(id + " 로그인");
+                    res.send({ isLogin: true, session: req.session });
                 } else res.send(false);
             });
         } else {
@@ -157,6 +154,12 @@ app.post("/signup", async (req, res) => {
     } else {
         res.send("중복된 아이디입니다.");
     }
+});
+
+// 페이지 이동할때 미들웨어확인.(로그인유지)
+app.get("/package", check_token, (req, res) => {
+    console.log(res);
+    console.log(req.session.access_token);
 });
 
 app.listen(8000, () => {
