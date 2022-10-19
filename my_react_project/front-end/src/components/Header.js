@@ -3,17 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { loginAction } from "../redux/middleware/loginAction";
 import { HeaderWrap, ContentsWrap, Content, User } from "../styles/HeaderStyle";
 
-const Header = () => {
+const Header = ({ removeCookie }) => {
     const nav = useNavigate();
     const dispatch = useDispatch();
 
     const logout = () => {
-        dispatch(loginAction.logout());
+        dispatch(loginAction.logout(removeCookie));
         alert("로그아웃 되었습니다.");
     };
 
-    const isLogin = useSelector((state) => state.login.isLogin);
-    const userID = useSelector((state) => state.login.id);
+    const userID = sessionStorage.getItem("userID");
+    const isLogin = sessionStorage.getItem("isLogin");
 
     return (
         <HeaderWrap>

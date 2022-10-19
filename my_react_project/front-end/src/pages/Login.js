@@ -5,7 +5,7 @@ import { loginAction } from "../redux/middleware/loginAction";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({ setCookie, removeCookie }) => {
+const Login = ({ setCookie }) => {
     // input.value 받아오기
     const [id, setId] = useState("");
     const idInput = (e) => {
@@ -22,7 +22,7 @@ const Login = ({ setCookie, removeCookie }) => {
 
     // 로그인 실행 함수
     const login = () => {
-        dispatch(loginAction.login(id, password, nav, setCookie, removeCookie));
+        dispatch(loginAction.login(id, password, nav, setCookie));
     };
 
     // enter 키로 로그인 함수 실행하기

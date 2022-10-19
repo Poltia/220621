@@ -40,42 +40,42 @@ app.use(
 );
 
 // 토큰 확인하는 미들웨어 함수
-const check_token = (req, res, next) => {
-    const { access_token, refresh_token, id } = req.session;
-    // access_token 확인
-    jwt.verify(access_token, process.env.ACCESS_TOKEN_KEY, (err, acc_decoded) => {
-        if (err) {
-            // access_token이 만료 되었으면
-            jwt.verify(
-                refresh_token,
-                process.env.REFRESH_TOKEN_KEY,
-                (err, ref_decoded) => {
-                    if (err) {
-                        console.log("refresh token 불량");
-                    } else {
-                        // DB에 refresh token 확인
-                        User.findOne({
-                            where: { user_id: id },
-                        }).then((e) => {
-                            if (e?.refresh_token === refresh_token) {
-                                // refresh token이 정상(똑같)이면 ㄱ
-                                const access_token = jwt.sign(
-                                    { user_id: ref_decoded.user_id },
-                                    process.env.ACCESS_TOKEN_KEY,
-                                    { expiresIn: "1d" }
-                                );
-                                req.session.access_token = access_token;
-                                next();
-                            } // else {다르면??}
-                        });
-                    }
-                }
-            );
-        } else {
-            next();
-        }
-    });
-};
+// const check_token = (req, res, next) => {
+//     const { access_token, refresh_token, id } = req.session;
+//     // access_token 확인
+//     jwt.verify(access_token, process.env.ACCESS_TOKEN_KEY, (err, acc_decoded) => {
+//         if (err) {
+//             // access_token이 만료 되었으면
+//             jwt.verify(
+//                 refresh_token,
+//                 process.env.REFRESH_TOKEN_KEY,
+//                 (err, ref_decoded) => {
+//                     if (err) {
+//                         console.log("refresh token 불량");
+//                     } else {
+//                         // DB에 refresh token 확인
+//                         User.findOne({
+//                             where: { user_id: id },
+//                         }).then((e) => {
+//                             if (e?.refresh_token === refresh_token) {
+//                                 // refresh token이 정상(똑같)이면 ㄱ
+//                                 const access_token = jwt.sign(
+//                                     { user_id: ref_decoded.user_id },
+//                                     process.env.ACCESS_TOKEN_KEY,
+//                                     { expiresIn: "1d" }
+//                                 );
+//                                 req.session.access_token = access_token;
+//                                 next();
+//                             } // else {다르면??}
+//                         });
+//                     }
+//                 }
+//             );
+//         } else {
+//             next();
+//         }
+//     });
+// };
 
 // 로그인 //
 app.post("/login", async (req, res) => {
@@ -121,6 +121,38 @@ app.post("/login", async (req, res) => {
     });
 });
 
+// 토큰 확인 //
+app.post("/tokencheck", (req, res) => {
+    let { access, refresh } = req.body;
+    // access token 확인
+    jwt.verify(access, process.env.ACCESS_TOKEN_KEY, (err, acc_decoded) => {
+        if (err) {
+            // access token 만료시 ㄱ
+            // refresh token 확인
+            jwt.verify(refresh, process.env.REFRESH_TOKEN_KEY, (err, ref_decoded) => {
+                if ((access === null || access === undefined) && refresh !== undefined) {
+                    // access token 이 없으면
+                    res.send({ relogin: true });
+                } else if (err) {
+                    // refresh token 만료시 ㄱ
+                    res.send({ relogin: true });
+                } else {
+                    // refresh token은 만료가 아니면
+                    const access_token = jwt.sign(
+                        { user_id: ref_decoded.user_id },
+                        process.env.ACCESS_TOKEN_KEY,
+                        { expiresIn: "1h" }
+                    );
+                    req.session.access_token = access_token;
+                    res.send({ session: req.session, relogin: false });
+                }
+            });
+        } else {
+            res.send({ relogin: false });
+        }
+    });
+});
+
 // 아이디 중복체크 //
 app.post("/idcheck", async (req, res) => {
     let { id } = req.body;
@@ -154,12 +186,6 @@ app.post("/signup", async (req, res) => {
     } else {
         res.send("중복된 아이디입니다.");
     }
-});
-
-// 페이지 이동할때 미들웨어확인.(로그인유지)
-app.get("/package", check_token, (req, res) => {
-    console.log(res);
-    console.log(req.session.access_token);
 });
 
 app.listen(8000, () => {
