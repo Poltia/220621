@@ -1,7 +1,8 @@
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginAction } from "../redux/middleware/loginAction";
-import { HeaderWrap, ContentsWrap, Content, User } from "../styles/HeaderStyle";
+import { HeaderWrap, ContentsWrap, Content, User, Hover } from "../styles/HeaderStyle";
 
 const Header = ({ removeCookie }) => {
     const nav = useNavigate();
@@ -9,22 +10,60 @@ const Header = ({ removeCookie }) => {
 
     const logout = () => {
         dispatch(loginAction.logout(removeCookie));
+        sessionStorage.removeItem("accessToken");
         alert("로그아웃 되었습니다.");
     };
 
-    const userID = sessionStorage.getItem("userID");
-    const isLogin = sessionStorage.getItem("isLogin");
+    const id = sessionStorage.getItem("userID");
+    const isLogin = useSelector((state) => state.login.isLogin);
+
+    // 마우스오버 //
+    const [close, setClose] = useState(true);
 
     return (
         <HeaderWrap>
             <Content onClick={() => nav("/")}>메인</Content>
             <ContentsWrap>
                 <Content
-                    onClick={() => {
-                        nav("/package");
+                    className={`list ${close ? "close" : "open"}`}
+                    onMouseOver={() => {
+                        setClose(false);
+                    }}
+                    onMouseLeave={() => {
+                        setClose(true);
                     }}
                 >
                     패키지
+                    {!close && (
+                        <Hover className="package">
+                            <div
+                                onMouseOver={() => {
+                                    setClose(false);
+                                }}
+                                onMouseLeave={() => {
+                                    setClose(true);
+                                }}
+                                onClick={() => {
+                                    nav("/jejupackage");
+                                }}
+                            >
+                                제주
+                            </div>
+                            <div
+                                onMouseOver={() => {
+                                    setClose(false);
+                                }}
+                                onMouseLeave={() => {
+                                    setClose(true);
+                                }}
+                                onClick={() => {
+                                    nav("/yangpackage");
+                                }}
+                            >
+                                양양
+                            </div>
+                        </Hover>
+                    )}
                 </Content>
                 <Content onClick={() => nav("/air")}>항공</Content>
                 <Content onClick={() => nav("/hotel")}>호텔</Content>
@@ -34,7 +73,7 @@ const Header = ({ removeCookie }) => {
                 <Content>문의</Content>
                 {isLogin ? (
                     <>
-                        <User onClick={() => nav("/mypage")}>{userID}</User>
+                        <User onClick={() => nav("/mypage")}>{id}</User>
                         <Content onClick={logout}>로그아웃</Content>
                     </>
                 ) : (

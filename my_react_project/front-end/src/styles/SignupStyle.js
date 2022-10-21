@@ -7,14 +7,14 @@ const SignupWrap = styled.div`
     transform: translate(-50%, -50%);
 
     label {
-        font-size: 30px;
-        margin: 10px 0;
+        font-size: 2vw;
+        margin: 0.5vw 0;
     }
     input {
-        width: 350px;
-        height: 45px;
-        font-size: 20px;
-        margin-bottom: 20px;
+        width: 24.5vw;
+        height: 5vh;
+        font-size: 1.6vw;
+        margin-bottom: 2.4vh;
     }
     button {
         position: absolute;

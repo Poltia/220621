@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 // images
 import { air, move, jeju_tel, jeju, yang, yang_tel } from "../imgs";
 // swiper
-import { Swiper, SwiperSlide } from "swiper/react";
+import { SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
@@ -35,14 +35,22 @@ const Main = () => {
             autoplay={{ delay: 2500 }}
         >
             <SwiperSlide>
-                <SlideWrap
-                    onClick={() => {
-                        nav("/package");
-                    }}
-                >
-                    <Jeju src={jeju} alt="jeju" />
+                <SlideWrap>
+                    <Jeju
+                        src={jeju}
+                        alt="jeju"
+                        onClick={() => {
+                            nav("/jejupackage");
+                        }}
+                    />
                     <LeftText>귤따러 제주 패키지</LeftText>
-                    <Yang src={yang} alt="yangyang" />
+                    <Yang
+                        src={yang}
+                        alt="yangyang"
+                        onClick={() => {
+                            nav("/yangpackage");
+                        }}
+                    />
                     <RightText>바다보러 양양 패키지</RightText>
                 </SlideWrap>
             </SwiperSlide>

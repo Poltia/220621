@@ -39,44 +39,6 @@ app.use(
     })
 );
 
-// 토큰 확인하는 미들웨어 함수
-// const check_token = (req, res, next) => {
-//     const { access_token, refresh_token, id } = req.session;
-//     // access_token 확인
-//     jwt.verify(access_token, process.env.ACCESS_TOKEN_KEY, (err, acc_decoded) => {
-//         if (err) {
-//             // access_token이 만료 되었으면
-//             jwt.verify(
-//                 refresh_token,
-//                 process.env.REFRESH_TOKEN_KEY,
-//                 (err, ref_decoded) => {
-//                     if (err) {
-//                         console.log("refresh token 불량");
-//                     } else {
-//                         // DB에 refresh token 확인
-//                         User.findOne({
-//                             where: { user_id: id },
-//                         }).then((e) => {
-//                             if (e?.refresh_token === refresh_token) {
-//                                 // refresh token이 정상(똑같)이면 ㄱ
-//                                 const access_token = jwt.sign(
-//                                     { user_id: ref_decoded.user_id },
-//                                     process.env.ACCESS_TOKEN_KEY,
-//                                     { expiresIn: "1d" }
-//                                 );
-//                                 req.session.access_token = access_token;
-//                                 next();
-//                             } // else {다르면??}
-//                         });
-//                     }
-//                 }
-//             );
-//         } else {
-//             next();
-//         }
-//     });
-// };
-
 // 로그인 //
 app.post("/login", async (req, res) => {
     let { id, password } = req.body;
@@ -98,13 +60,6 @@ app.post("/login", async (req, res) => {
                         process.env.REFRESH_TOKEN_KEY,
                         { expiresIn: "1d" }
                     );
-                    // // DB에 refresh token 저장
-                    // User.update(
-                    //     // 바꿀 내용의 객체
-                    //     {refresh_token: refresh_token},
-                    //     // 찾을 곳의 객체
-                    //     {where: { user_id: id }}
-                    // );
                     // 세션에 각 토큰값을 할당. express-session에 저장
                     req.session.access_token = access_token;
                     req.session.refresh_token = refresh_token;
@@ -144,11 +99,18 @@ app.post("/tokencheck", (req, res) => {
                         { expiresIn: "1h" }
                     );
                     req.session.access_token = access_token;
-                    res.send({ session: req.session, relogin: false });
+                    res.send({ relogin: false, session: req.session });
                 }
             });
         } else {
-            res.send({ relogin: false });
+            // access token 이 정상이면 ㄱ (재발급. 로그인연장)
+            const access_token = jwt.sign(
+                { user_id: acc_decoded.user_id },
+                process.env.ACCESS_TOKEN_KEY,
+                { expiresIn: "1h" }
+            );
+            req.session.access_token = access_token;
+            res.send({ relogin: false, session: req.session });
         }
     });
 });

@@ -1,50 +1,37 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Header } from "./components";
-import { Main, Login, Signup, Mypage, Package, Air, Hotel, Review } from "./pages";
+import {
+    Main,
+    Login,
+    Signup,
+    Mypage,
+    JejuPackage,
+    Air,
+    Hotel,
+    Review,
+    YangPackage,
+} from "./pages";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAction } from "./redux/middleware/loginAction";
 
 function App() {
     const nav = useNavigate();
+    const dispatch = useDispatch();
+    const id = sessionStorage.getItem("userID");
 
     // 쿠키
     const [cookies, setCookie, removeCookie] = useCookies(["refreshToken"]);
-    // 쿠키 확인하기 ㄱ
+
+    // 로그인 체크 //
     useEffect(() => {
-        console.log(cookies);
-    }, [cookies]);
-
-    // access 에 access token 할당
-    const access = sessionStorage.getItem("accessToken");
-    // refresh 에 refresh token 할당
-    const refresh = cookies.refreshToken;
-
-    // 토큰 확인 요청 함수
-    function tokenCheck() {
-        return async () => {
-            const token = await axios({
-                method: "post",
-                url: "http://localhost:8000/tokencheck",
-                data: { access, refresh },
-            });
-            console.log(token.data);
-            if (token.data.relogin === true) {
-                alert("로그인 후 이용해 주세요");
-                nav("/login");
-            } else if (token.data.relogin === false && token.data.session !== undefined) {
-                sessionStorage.removeItem("accessToken");
-                sessionStorage.setItem("accessToken", token.data.session.access_token);
-            } else alert("에러니까 코드 다시짜렴... 훗");
-        };
-    }
-    // 토큰 확인하기 실행
-    tokenCheck();
+        dispatch(loginAction.loginCheck(cookies, nav, id));
+    }, [cookies, id, nav, dispatch]);
 
     return (
         <>
             <Header removeCookie={removeCookie} />
-            {/* <button onClick={tokenCheck()}>토큰확인</button> */}
             <Routes>
                 <Route index element={<Main />} />
                 <Route
@@ -54,7 +41,8 @@ function App() {
                 />
                 <Route path="/Signup" element={<Signup />} />
                 <Route path="/mypage" element={<Mypage />} />
-                <Route path="/package" element={<Package />} />
+                <Route path="/jejupackage" element={<JejuPackage />} />
+                <Route path="/yangpackage" element={<YangPackage />} />
                 <Route path="/air" element={<Air />} />
                 <Route path="/hotel" element={<Hotel />} />
                 <Route path="/review" element={<Review />} />
