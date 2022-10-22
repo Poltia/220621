@@ -21,6 +21,18 @@ class User extends Sequelize.Model {
                     type: Sequelize.STRING(20),
                     allowNull: false,
                 },
+                package: {
+                    type: Sequelize.STRING(225),
+                    allowNull: true,
+                },
+                air: {
+                    type: Sequelize.STRING(225),
+                    allowNull: true,
+                },
+                hotel: {
+                    type: Sequelize.STRING(225),
+                    allowNull: true,
+                },
             },
             {
                 sequelize,

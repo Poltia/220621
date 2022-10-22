@@ -1,7 +1,7 @@
 const express = require("express");
 const session = require("express-session");
 const cors = require("cors");
-const { sequelize, User } = require("./public");
+const { sequelize, User, List } = require("./public");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dot = require("dotenv");
@@ -148,6 +148,66 @@ app.post("/signup", async (req, res) => {
     } else {
         res.send("중복된 아이디입니다.");
     }
+});
+
+// 제주 패키지 예약
+app.post("/jejupackage", async (req, res) => {
+    let { id, selected } = req.body;
+    const reserv = await User.findOne({
+        where: { user_id: id },
+    });
+    if (reserv) {
+        User.update({ package: "제주" + selected }, { where: { user_id: id } });
+        res.send(true);
+    } else {
+        res.send(false);
+    }
+});
+// 제주 패키지 예약 확인
+app.post("/jejupackagecheck", async (req, res) => {
+    let { selected } = req.body;
+    const check = await User.findAll({
+        where: { package: "제주" + selected },
+    });
+    res.send(check);
+});
+
+// 양양 패키지 예약
+app.post("/yangpackage", async (req, res) => {
+    let { id, selected } = req.body;
+    const reserv = await User.findOne({
+        where: { user_id: id },
+    });
+    if (reserv) {
+        User.update({ package: "양양" + selected }, { where: { user_id: id } });
+        res.send(true);
+    } else {
+        res.send(false);
+    }
+});
+// 양양 패키지 예약 확인
+app.post("/yangpackagecheck", async (req, res) => {
+    let { selected } = req.body;
+    const check = await User.findAll({
+        where: { package: "양양" + selected },
+    });
+    res.send(check);
+});
+
+// 글 등록하기
+app.post("/write", async (req, res) => {
+    const { id, title, text } = req.body;
+    const write = await List.create({
+        writer: id,
+        title: title,
+        content: text,
+    })
+        .then(() => {
+            res.send(true);
+        })
+        .catch((err) => {
+            res.send(err);
+        });
 });
 
 app.listen(8000, () => {

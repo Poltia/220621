@@ -37,7 +37,7 @@ const Login = ({ setCookie }) => {
             <Title>로그인</Title>
             <label>아이디</label>
             <br />
-            <input type="text" onChange={idInput} onKeyPress={enterKeyPress} />
+            <input type="text" onChange={idInput} onKeyPress={enterKeyPress} autoFocus />
             <br />
             <label>비밀번호</label>
             <br />

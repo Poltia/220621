@@ -16,15 +16,15 @@ const SignupWrap = styled.div`
         font-size: 1.6vw;
         margin-bottom: 2.4vh;
     }
+    select {
+        width: 10vw;
+        height: 6vh;
+        font-size: 1.6vw;
+    }
     button {
         position: absolute;
         right: 0;
-        &:hover {
-            cursor: pointer;
-            color: white;
-            background-color: gray;
-            transition: 0.3s;
-        }
+        height: 6vh;
     }
 `;
 

@@ -6,10 +6,12 @@ import {
     Signup,
     Mypage,
     JejuPackage,
+    YangPackage,
     Air,
     Hotel,
     Review,
-    YangPackage,
+    Write,
+    Post,
 } from "./pages";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
@@ -46,6 +48,8 @@ function App() {
                 <Route path="/air" element={<Air />} />
                 <Route path="/hotel" element={<Hotel />} />
                 <Route path="/review" element={<Review />} />
+                <Route path="/write" element={<Write />} />
+                <Route path="/post" element={<Post />} />
             </Routes>
         </>
     );

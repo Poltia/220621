@@ -24,10 +24,15 @@ const Signup = () => {
     const phInput = (e) => {
         setPhone(e.target.value);
     };
-    const [email, setEmail] = useState("");
-    const emailInput = (e) => {
-        setEmail(e.target.value);
+    const [mail, setMail] = useState("");
+    const mailInput = (e) => {
+        setMail(e.target.value);
     };
+    const [email_, setEmail_] = useState("");
+    const emailSelect = (e) => {
+        setEmail_(e.target.value);
+    };
+    const email = mail + "@" + email_;
 
     // use 할당 하기
     const nav = useNavigate();
@@ -128,11 +133,19 @@ const Signup = () => {
             <label>E-mail</label>
             <br />
             <input
-                type="email"
-                onChange={emailInput}
+                style={{ width: "13.5vw" }}
+                type="text"
+                onChange={mailInput}
                 placeholder="이메일 주소 입력"
                 onKeyPress={enterKeyPress}
             />
+            @
+            <select onChange={emailSelect}>
+                <option value="">선택</option>
+                <option value="gmail.com">gmail.com</option>
+                <option value="naver.com">naver.com</option>
+                <option value="daum.net">daum.net</option>
+            </select>
             <br />
             <Button onClick={check}>가입</Button>
         </SignupWrap>

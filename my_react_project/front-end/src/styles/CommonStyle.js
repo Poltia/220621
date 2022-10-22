@@ -5,7 +5,13 @@ const Button = styled.button`
     border-radius: 0.7vw;
     background: lightgray;
     padding: 0.7vw;
-    font-size: 1.8vw;
+    font-size: 1.6vw;
+    &:hover {
+        cursor: pointer;
+        color: white;
+        background-color: gray;
+        transition: 0.3s;
+    }
 `;
 
 const Title = styled.h1`

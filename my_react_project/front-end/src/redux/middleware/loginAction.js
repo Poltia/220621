@@ -59,6 +59,7 @@ function login(id, password, nav, setCookie) {
     };
 }
 
+// 로그아웃시
 function logout(removeCookie) {
     return (dispatch, getState) => {
         dispatch({ type: "LOGOUT" });
@@ -68,6 +69,7 @@ function logout(removeCookie) {
     };
 }
 
+// 회원가입시
 function signup(id, password, phone, email) {
     return async (dispatch, getState) => {
         const user = await axios({

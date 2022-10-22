@@ -6,6 +6,20 @@ import JejuPackage from "./JejuPackage";
 import YangPackage from "./YangPackage";
 import Air from "./Air";
 import Hotel from "./Hotel";
-import Review from "./Review";
+import Review from "./review/Review";
+import Write from "./review/Write";
+import Post from "./review/Post";
 
-export { Main, Login, Signup, Mypage, JejuPackage, YangPackage, Air, Hotel, Review };
+export {
+    Main,
+    Login,
+    Signup,
+    Mypage,
+    JejuPackage,
+    YangPackage,
+    Air,
+    Hotel,
+    Review,
+    Write,
+    Post,
+};

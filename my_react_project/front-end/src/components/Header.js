@@ -17,7 +17,7 @@ const Header = ({ removeCookie }) => {
     const id = sessionStorage.getItem("userID");
     const isLogin = useSelector((state) => state.login.isLogin);
 
-    // 마우스오버 //
+    // 마우스오버시 사용할 변수 설정
     const [close, setClose] = useState(true);
 
     return (
