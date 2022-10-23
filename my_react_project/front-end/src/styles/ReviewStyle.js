@@ -44,4 +44,13 @@ const Tbody = styled.tbody`
     font-size: 1.2vw;
 `;
 
-export { ReviewWrap, Table, Thead, HeadTitle, HeadWriter, Tbody };
+const TD = styled.td`
+    &:hover {
+        cursor: pointer;
+    }
+`;
+const TD2 = styled.td`
+    text-align: center;
+`;
+
+export { ReviewWrap, Table, Thead, HeadTitle, HeadWriter, Tbody, TD, TD2 };

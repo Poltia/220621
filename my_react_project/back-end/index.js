@@ -197,6 +197,7 @@ app.post("/yangpackagecheck", async (req, res) => {
 // 글 등록하기
 app.post("/write", async (req, res) => {
     const { id, title, text } = req.body;
+    console.log(req.body);
     const write = await List.create({
         writer: id,
         title: title,
@@ -204,6 +205,17 @@ app.post("/write", async (req, res) => {
     })
         .then(() => {
             res.send(true);
+        })
+        .catch((err) => {
+            res.send(err);
+        });
+});
+
+// 글 목록
+app.post("/list", async (req, res) => {
+    const list = await List.findAll()
+        .then((e) => {
+            res.send(e);
         })
         .catch((err) => {
             res.send(err);
