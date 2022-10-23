@@ -74,7 +74,7 @@ const Signup = () => {
         let regMail =
             /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
         let _email = regMail.test(email);
-        if (_email === false) alert("이메일을 형식에 맞게 입력해주세요.");
+        if (_email === false) alert("이메일을 다시 입력해주세요.");
 
         if (_pw === true && _phone === true && _email === true) {
             return _signup();
@@ -117,7 +117,7 @@ const Signup = () => {
             <input
                 type="password"
                 onChange={checkInput}
-                placeholder="비밀번호를 다시 입력해 주세요"
+                placeholder="위와 동일한 비밀번호를 입력해 주세요"
                 onKeyPress={enterKeyPress}
             />
             <br />

@@ -150,6 +150,73 @@ app.post("/signup", async (req, res) => {
     }
 });
 
+// 비밀번호 변경
+app.post("/pwchange", async (req, res) => {
+    const { id, password } = req.body;
+    const pwChange = await User.findOne({
+        where: { user_id: id },
+    });
+    if (pwChange) {
+        bcrypt.hash(password, 10, (err, data) => {
+            User.update({ password: data }, { where: { user_id: id } })
+                .then(() => {
+                    res.send(true);
+                })
+                .catch((err) => {
+                    res.send(err);
+                });
+        });
+    }
+});
+
+// 전화번호 변경
+app.post("/phchange", async (req, res) => {
+    const { id, phone } = req.body;
+    const phChange = await User.findOne({
+        where: { user_id: id },
+    });
+    if (phChange) {
+        User.update({ phone: phone }, { where: { user_id: id } })
+            .then(() => {
+                res.send(true);
+            })
+            .catch((err) => {
+                res.send(err);
+            });
+    }
+});
+
+// 이메일 변경
+app.post("/emailchange", async (req, res) => {
+    const { id, email } = req.body;
+    const emailChange = await User.findOne({
+        where: { user_id: id },
+    });
+    if (emailChange) {
+        User.update({ email: email }, { where: { user_id: id } })
+            .then(() => {
+                res.send(true);
+            })
+            .catch((err) => {
+                res.send(err);
+            });
+    }
+});
+
+// 로그인 유저정보 리듀서로 보내기
+app.post("/getuserinfo", async (req, res) => {
+    const { id } = req.body;
+    const user = await User.findOne({
+        where: { user_id: id },
+    })
+        .then((e) => {
+            res.send(e);
+        })
+        .catch((err) => {
+            res.send(err);
+        });
+});
+
 // 제주 패키지 예약
 app.post("/jejupackage", async (req, res) => {
     let { id, selected } = req.body;

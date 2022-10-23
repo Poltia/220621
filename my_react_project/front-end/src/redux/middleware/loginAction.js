@@ -60,12 +60,13 @@ function login(id, password, nav, setCookie) {
 }
 
 // 로그아웃시
-function logout(removeCookie) {
+function logout(removeCookie, nav) {
     return (dispatch, getState) => {
         dispatch({ type: "LOGOUT" });
         sessionStorage.removeItem("accessToken");
         sessionStorage.removeItem("userID");
         removeCookie("refreshToken");
+        nav("/");
     };
 }
 

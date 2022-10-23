@@ -23,7 +23,7 @@ const Post = () => {
             </Header>
             <Button
                 onClick={() => {
-                    nav("/board");
+                    nav("/review");
                 }}
             >
                 글목록

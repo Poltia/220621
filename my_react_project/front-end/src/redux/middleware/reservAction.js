@@ -23,6 +23,7 @@ function jeju_package(selected, nav) {
         };
     }
 }
+
 // 제주 패키지 예약 확인
 function jeju_package_check(selected) {
     return async (dispatch, getState) => {
@@ -35,6 +36,8 @@ function jeju_package_check(selected) {
         dispatch({ type: "JEJU_PACKAGE", payload: { number } });
     };
 }
+
+
 
 // 양양 패키지 예약시
 function yang_package(selected, nav) {
@@ -58,6 +61,7 @@ function yang_package(selected, nav) {
         }
     };
 }
+
 // 양양 패키지 예약 확인
 function yang_package_check(selected) {
     return async (dispatch, getState) => {
@@ -70,6 +74,9 @@ function yang_package_check(selected) {
         dispatch({ type: "YANG_PACKAGE", payload: { number } });
     };
 }
+
+
+//
 
 export const reservAction = {
     jeju_package,

@@ -1,26 +1,28 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { AirWrap, Left, Right, Select } from "../styles/AirStyle";
 
 const Air = () => {
+    // Hook 할당
+    const dispatch = useDispatch();
+
     return (
-        <div>
-            <div>검색 바</div>
-            <div>
-                <div>
-                    <div>국내</div>
-                    <ul>
-                        <li>제주</li>
-                        <li>시간별</li>
-                    </ul>
-                </div>
-                <div>
-                    <div>해외</div>
-                    <ul>
-                        <li>런던</li>
-                        <li>시간별</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <AirWrap>
+            <Left>
+                <Select>
+                    <option value="">--목적지--</option>
+                    <option value="jeju">제주</option>
+                    <option value="yang">양양</option>
+                </Select>
+                <Select>
+                    <option value="">--시간--</option>
+                    <option value="8">AM 8</option>
+                    <option value="13">PM 1</option>
+                    <option value="19">PM 7</option>
+                </Select>
+            </Left>
+            <Right></Right>
+        </AirWrap>
     );
 };
 

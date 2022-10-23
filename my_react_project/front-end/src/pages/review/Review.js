@@ -17,6 +17,7 @@ const Review = () => {
     // Hook 할당 하기
     const nav = useNavigate();
     const dispatch = useDispatch();
+    // 글 목록 불러오기
     const list = useSelector((state) => state.list.list);
 
     const id = sessionStorage.getItem("userID");
@@ -29,12 +30,11 @@ const Review = () => {
         }
     };
 
-    //랜더링 될때마다 데이터베이스에 있는 목록 불러와서 리듀서에 담게 하기!!!!!!!!!! 그래서 불러와가지고 요기밑에서 읽게 끔
+    //랜더링 될때마다 데이터베이스에 있는 목록 불러와서 리듀서에 담게 하기
     useEffect(() => {
         dispatch(reviewAction.list());
     });
 
-    
     return (
         <ReviewWrap>
             <Table>
@@ -50,7 +50,7 @@ const Review = () => {
                 </Thead>
                 <Tbody>
                     {list.reverse().map((el, index) => (
-                        <List key={index} index={index} list={el} />
+                        <List key={index} list={el} />
                     ))}
                 </Tbody>
             </Table>

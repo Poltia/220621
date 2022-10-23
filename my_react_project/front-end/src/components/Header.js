@@ -9,7 +9,7 @@ const Header = ({ removeCookie }) => {
     const dispatch = useDispatch();
 
     const logout = () => {
-        dispatch(loginAction.logout(removeCookie));
+        dispatch(loginAction.logout(removeCookie, nav));
         sessionStorage.removeItem("accessToken");
         alert("로그아웃 되었습니다.");
     };
