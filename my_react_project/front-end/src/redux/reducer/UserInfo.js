@@ -1,6 +1,9 @@
 const init = {
     phone: "",
     email: "",
+    package: "",
+    air: "",
+    hotel: "",
 };
 
 function reducer(state = init, action) {
@@ -10,6 +13,9 @@ function reducer(state = init, action) {
             return {
                 phone: payload.phone,
                 email: payload.email,
+                package: payload._package,
+                air: payload.air,
+                hotel: payload.hotel,
             };
 
         default:

@@ -261,6 +261,40 @@ app.post("/yangpackagecheck", async (req, res) => {
     res.send(check);
 });
 
+// package 예약 취소
+app.post("/packagecancel", async (req, res) => {
+    const { id } = req.body;
+    const cancel = await User.update({ package: null }, { where: { user_id: id } })
+        .then(() => {
+            res.send(true);
+        })
+        .catch((err) => {
+            res.send(err);
+        });
+});
+// air 예약 취소
+app.post("aircancel", async (req, res) => {
+    const { id } = req.body;
+    const cancel = await User.update({ air: null }, { where: { user_id: id } })
+        .then(() => {
+            res.send(true);
+        })
+        .catch((err) => {
+            res.send(err);
+        });
+});
+// hotel 예약 취소
+app.post("/hotelcancel", async (req, res) => {
+    const { id } = req.body;
+    const cancel = await User.update({ hotel: null }, { where: { user_id: id } })
+        .then(() => {
+            res.send(true);
+        })
+        .catch((err) => {
+            res.send(err);
+        });
+});
+
 // 글 등록하기
 app.post("/write", async (req, res) => {
     const { id, title, text } = req.body;

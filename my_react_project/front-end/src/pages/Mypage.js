@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
     MyWrap,
     Left,
@@ -9,6 +9,7 @@ import {
     Wrap,
     Select,
     Reserved,
+    RightWrap,
 } from "../styles/MypageStyle";
 import { Button } from "../styles/CommonStyle";
 import { useDispatch, useSelector } from "react-redux";
@@ -79,6 +80,17 @@ const Mypage = () => {
     dispatch(mypageAction.get_userInfo(id));
     const user = useSelector((state) => state.userInfo);
 
+    // 예약취소 버튼 함수
+    const package_cancel = () => {
+        dispatch(mypageAction.package_cancel(id));
+    };
+    const air_cancel = () => {
+        dispatch(mypageAction.air_cancel(id));
+    };
+    const hotel_cancel = () => {
+        dispatch(mypageAction.hotel_cancel(id));
+    };
+
     return (
         <MyWrap>
             <Left>
@@ -124,12 +136,43 @@ const Mypage = () => {
             </Left>
             <Right>
                 <Title>예약 정보</Title>
-                <Label>패키지</Label>
-                <Reserved></Reserved>
-                <Label>항공</Label>
-                <Reserved></Reserved>
-                <Label>호텔</Label>
-                <Reserved></Reserved>
+                <RightWrap>
+                    {user.package && (
+                        <Wrap>
+                            <Label>패키지</Label>
+                            {user.packge === "제주1d" ? (
+                                <Reserved>제주 당일치기</Reserved>
+                            ) : user.package === "제주2d" ? (
+                                <Reserved>제주 1박2일</Reserved>
+                            ) : user.package === "제주3d" ? (
+                                <Reserved>제주 2박3일</Reserved>
+                            ) : user.package === "양양1d" ? (
+                                <Reserved>양양 당일치기</Reserved>
+                            ) : user.package === "양양2d" ? (
+                                <Reserved>양양 1박2일</Reserved>
+                            ) : user.package === "양양3d" ? (
+                                <Reserved>양양 2박3일</Reserved>
+                            ) : (
+                                ""
+                            )}
+                            <Button onClick={package_cancel}>예약 취소</Button>
+                        </Wrap>
+                    )}
+                    {user.air && (
+                        <Wrap>
+                            <Label>항공</Label>
+                            <Reserved>air : {user.air}</Reserved>
+                            <Button onClick={air_cancel}>예약 취소</Button>
+                        </Wrap>
+                    )}
+                    {user.hotel && (
+                        <Wrap>
+                            <Label>호텔</Label>
+                            <Reserved>hotel : {user.hotel}</Reserved>
+                            <Button onClick={hotel_cancel}>예약 취소</Button>
+                        </Wrap>
+                    )}
+                </RightWrap>
             </Right>
         </MyWrap>
     );

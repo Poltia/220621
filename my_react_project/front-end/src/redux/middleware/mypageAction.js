@@ -62,9 +62,66 @@ function get_userInfo(id) {
         if (user.data) {
             const phone = user.data.phone;
             const email = user.data.email;
-            dispatch({ type: "USER", payload: { phone, email } });
+            const _package = user.data.package;
+            const air = user.data.air;
+            const hotel = user.data.hotel;
+            dispatch({ type: "USER", payload: { phone, email, _package, air, hotel } });
         }
     };
 }
 
-export const mypageAction = { password_change, phone_change, email_change, get_userInfo };
+// package 예약 취소
+function package_cancel(id) {
+    return async (dispatch, getState) => {
+        const cancel = await axios({
+            method: "post",
+            url: "http://localhost:8000/packagecancel",
+            data: { id },
+        });
+        if (cancel.data === true) {
+            alert("패키지 예약이 취소되었습니다.");
+        } else {
+            alert("패키지 예약 취소가 되지 않았습니다.");
+        }
+    };
+}
+// air 예약 취소
+function air_cancel(id) {
+    return async (dispatch, getState) => {
+        const cancel = await axios({
+            method: "post",
+            url: "http://localhost:8000/aircancel",
+            data: { id },
+        });
+        if (cancel.data === true) {
+            alert("항공 예약이 취소되었습니다.");
+        } else {
+            alert("항공 예약 취소가 되지 않았습니다.");
+        }
+    };
+}
+// hotel 예약 취소
+function hotel_cancel(id) {
+    return async (dispatch, getState) => {
+        const cancel = await axios({
+            method: "post",
+            url: "http://localhost:8000/hotelcancel",
+            data: { id },
+        });
+        if (cancel.data === true) {
+            alert("호텔 예약이 취소되었습니다.");
+        } else {
+            alert("호텔 예약 취소가 되지 않았습니다.");
+        }
+    };
+}
+
+export const mypageAction = {
+    password_change,
+    phone_change,
+    email_change,
+    get_userInfo,
+    package_cancel,
+    air_cancel,
+    hotel_cancel,
+};
