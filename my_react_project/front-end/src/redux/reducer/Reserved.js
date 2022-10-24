@@ -1,6 +1,7 @@
 const init = {
     jeju_package: "",
     yang_package: "",
+    hotel: "",
 };
 
 function reducer(state = init, action) {
@@ -16,6 +17,12 @@ function reducer(state = init, action) {
             return {
                 ...state,
                 yang_package: payload.number,
+            };
+
+        case "HOTEL":
+            return {
+                ...state,
+                hotel: payload.number,
             };
 
         default:

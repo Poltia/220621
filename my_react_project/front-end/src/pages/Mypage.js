@@ -134,6 +134,7 @@ const Mypage = () => {
                     <Button onClick={email_click}>변경하기</Button>
                 </Wrap>
             </Left>
+
             <Right>
                 <Title>예약 정보</Title>
                 <RightWrap>
@@ -168,7 +169,21 @@ const Mypage = () => {
                     {user.hotel && (
                         <Wrap>
                             <Label>호텔</Label>
-                            <Reserved>hotel : {user.hotel}</Reserved>
+                            {user.hotel === "jeju1d" ? (
+                                <Reserved>제주 1박</Reserved>
+                            ) : user.hotel === "jeju2d" ? (
+                                <Reserved>제주 2박</Reserved>
+                            ) : user.hotel === "jeju3d" ? (
+                                <Reserved>제주 3박</Reserved>
+                            ) : user.hotel === "yang1d" ? (
+                                <Reserved>양양 1박</Reserved>
+                            ) : user.hotel === "yang2d" ? (
+                                <Reserved>양양 2박</Reserved>
+                            ) : user.hotel === "yang3d" ? (
+                                <Reserved>양양 3박</Reserved>
+                            ) : (
+                                ""
+                            )}
                             <Button onClick={hotel_cancel}>예약 취소</Button>
                         </Wrap>
                     )}

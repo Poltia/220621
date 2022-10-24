@@ -37,8 +37,6 @@ function jeju_package_check(selected) {
     };
 }
 
-
-
 // 양양 패키지 예약시
 function yang_package(selected, nav) {
     const id = sessionStorage.getItem("userID");
@@ -75,12 +73,45 @@ function yang_package_check(selected) {
     };
 }
 
+// 호텔 예약하기
+function hotel(id, place, day, nav) {
+    return async (dispatch, getState) => {
+        const reserve = await axios({
+            method: "post",
+            url: "http://localhost:8000/hotelreserve",
+            data: { id, place, day },
+        });
+        if (reserve.data === true) {
+            alert("호텔 예약이 되었습니다.");
+            nav("/");
+        } else {
+            alert("호텔 예약에 실패했습니다.");
+        }
+    };
+}
 
-//
+// 호텔 예약 확인하기
+function hotel_check(place, day) {
+    return async (dispatch, getState) => {
+        const check = await axios({
+            method: "post",
+            url: "http://localhost:8000/hotelcheck",
+            data: { place, day },
+        });
+        if (!check.data) {
+            alert("예약 정보를 불러오는데 실패했습니다.");
+        } else {
+            const number = check.data.length;
+            dispatch({ type: "HOTEL", payload: { number } });
+        }
+    };
+}
 
 export const reservAction = {
     jeju_package,
     jeju_package_check,
     yang_package,
     yang_package_check,
+    hotel,
+    hotel_check,
 };

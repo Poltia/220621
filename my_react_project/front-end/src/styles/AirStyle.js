@@ -6,6 +6,8 @@ const AirWrap = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
+    width: 80vw;
+    border: 1px solid black;
 `;
 
 const Left = styled.div`

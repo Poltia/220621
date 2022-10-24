@@ -261,6 +261,30 @@ app.post("/yangpackagecheck", async (req, res) => {
     res.send(check);
 });
 
+// hotel 예약하기
+app.post("/hotelreserve", async (req, res) => {
+    const { id, place, day } = req.body;
+    const reserv = place + day;
+    const reserve = await User.update({ hotel: reserv }, { where: { user_id: id } })
+        .then(() => {
+            res.send(true);
+        })
+        .catch((err) => {
+            res.send(err);
+        });
+});
+// hotel 예약 확인
+app.post("/hotelcheck", async (req, res) => {
+    const { place, day } = req.body;
+    const check = await User.findAll({ where: { hotel: place + day } })
+        .then((e) => {
+            res.send(e);
+        })
+        .catch((err) => {
+            res.send(err);
+        });
+});
+
 // package 예약 취소
 app.post("/packagecancel", async (req, res) => {
     const { id } = req.body;
