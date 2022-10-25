@@ -25,9 +25,15 @@ class User extends Sequelize.Model {
                     type: Sequelize.STRING(225),
                     allowNull: true,
                 },
-                air: {
+                air_date: {
+                    type: Sequelize.DATE,
+                },
+                air_destination: {
                     type: Sequelize.STRING(225),
                     allowNull: true,
+                },
+                air_seat: {
+                    type: Sequelize.STRING(225),
                 },
                 hotel: {
                     type: Sequelize.STRING(225),

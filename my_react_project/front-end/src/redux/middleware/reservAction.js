@@ -89,7 +89,6 @@ function hotel(id, place, day, nav) {
         }
     };
 }
-
 // 호텔 예약 확인하기
 function hotel_check(place, day) {
     return async (dispatch, getState) => {
@@ -107,6 +106,47 @@ function hotel_check(place, day) {
     };
 }
 
+// 항공 예약하기
+function air(id, destination, date, seat, nav) {
+    return async (dispatch, getState) => {
+        const reserve = await axios({
+            method: "post",
+            url: "http://localhost:8000/air",
+            data: { id, destination, date, seat },
+        });
+        if (reserve.data === true) {
+            alert("항공 예약이 되었습니다.");
+        } else {
+            alert("항공 예약에 실패했습니다.");
+            console.log(reserve.data);
+        }
+    };
+}
+// 항공 예약 확인하기
+function air_check(destination, date) {
+    return async (dispatch, getState) => {
+        const check = await axios({
+            method: "post",
+            url: "http://localhost:8000/aircheck",
+            data: { destination, date },
+        });
+        if (check.data === false) {
+            alert("항공 예약 확인에 실패했습니다.");
+        } else {
+            const _destination = [];
+            const _date = [];
+            const _seat = [];
+            for (let i = 0; i < check.data.length; i++) {
+                _date.push(check.data[i].air_date);
+                _destination.push(check.data[i].air_destination);
+                _seat.push(check.data[i].air_seat);
+            }
+            dispatch({ type: "AIR", payload: { _date, _destination, _seat } });
+        }
+    };
+}
+// 
+
 export const reservAction = {
     jeju_package,
     jeju_package_check,
@@ -114,4 +154,6 @@ export const reservAction = {
     yang_package_check,
     hotel,
     hotel_check,
+    air,
+    air_check,
 };

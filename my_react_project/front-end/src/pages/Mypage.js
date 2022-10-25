@@ -159,13 +159,7 @@ const Mypage = () => {
                             <Button onClick={package_cancel}>예약 취소</Button>
                         </Wrap>
                     )}
-                    {user.air && (
-                        <Wrap>
-                            <Label>항공</Label>
-                            <Reserved>air : {user.air}</Reserved>
-                            <Button onClick={air_cancel}>예약 취소</Button>
-                        </Wrap>
-                    )}
+
                     {user.hotel && (
                         <Wrap>
                             <Label>호텔</Label>
@@ -185,6 +179,16 @@ const Mypage = () => {
                                 ""
                             )}
                             <Button onClick={hotel_cancel}>예약 취소</Button>
+                        </Wrap>
+                    )}
+                    
+                    {user.air_seat && (
+                        <Wrap>
+                            <Label>항공</Label>
+                            <Reserved>air : {user.air_date}</Reserved>
+                            <Reserved>air : {user.air_destination}</Reserved>
+                            <Reserved>air : {user.air_seat}</Reserved>
+                            <Button onClick={air_cancel}>예약 취소</Button>
                         </Wrap>
                     )}
                 </RightWrap>

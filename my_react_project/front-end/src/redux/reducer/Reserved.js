@@ -2,6 +2,9 @@ const init = {
     jeju_package: "",
     yang_package: "",
     hotel: "",
+    air_date: [],
+    air_destination: [],
+    air_seat: [],
 };
 
 function reducer(state = init, action) {
@@ -23,6 +26,14 @@ function reducer(state = init, action) {
             return {
                 ...state,
                 hotel: payload.number,
+            };
+
+        case "AIR":
+            return {
+                ...state,
+                air_date: payload._date,
+                air_destination: payload._destination,
+                air_seat: payload._seat,
             };
 
         default:

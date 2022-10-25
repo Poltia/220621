@@ -285,6 +285,34 @@ app.post("/hotelcheck", async (req, res) => {
         });
 });
 
+// air 예약하기
+app.post("/air", async (req, res) => {
+    const { id, destination, date, seat } = req.body;
+    const reserve = await User.update(
+        { air_date: date, air_destination: destination, air_seat: seat },
+        { where: { user_id: id } }
+    )
+        .then(() => {
+            res.send(true);
+        })
+        .catch((err) => {
+            res.send(err);
+        });
+});
+// air 예약 확인하기
+app.post("/aircheck", async (req, res) => {
+    const { destination, date } = req.body;
+    const check = await User.findAll({
+        where: { air_date: date + "T00:00:00.000Z", air_destination: destination },
+    })
+        .then((e) => {
+            res.send(e);
+        })
+        .catch(() => {
+            res.send(false);
+        });
+});
+
 // package 예약 취소
 app.post("/packagecancel", async (req, res) => {
     const { id } = req.body;
