@@ -50,17 +50,17 @@ const Wrap = styled.div`
 
 const RightWrap = styled.div`
     position: absolute;
-    top: 50%;
+    top: 65%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    & > div {
+    /* & > div {
         position: relative;
         width: 20vw;
         height: 13vh;
         border: 1px solid lightgray;
         border-radius: 0.5vw;
-    }
+    } */
     & > div > label {
         font-size: 2vw;
     }
@@ -73,4 +73,69 @@ const RightWrap = styled.div`
 const Reserved = styled.div`
     font-size: 1.8vw;
 `;
-export { MyWrap, Left, Right, Title, Label, Input, Wrap, Select, Reserved, RightWrap };
+const PackageWrap = styled.div`
+    position: relative;
+    width: 20vw;
+    height: 14vh;
+    border: 1px solid lightgray;
+    border-radius: 0.5vw;
+    display: flex;
+    flex-direction: column;
+    margin: 2vh 2vw;
+    & > button {
+        font-size: 1.3vw;
+        width: 7vw;
+    }
+    & > * {
+        margin: 0.4vw;
+    }
+`;
+const HotelWrap = styled.div`
+    position: relative;
+    width: 20vw;
+    height: 14vh;
+    border: 1px solid lightgray;
+    border-radius: 0.5vw;
+    display: flex;
+    flex-direction: column;
+    margin: 2vh 2vw;
+    & > button {
+        font-size: 1.3vw;
+        width: 7vw;
+    }
+    & > * {
+        margin: 0.4vw;
+    }
+`;
+const AirWrap = styled.div`
+    position: relative;
+    width: 20vw;
+    border: 1px solid lightgray;
+    border-radius: 0.5vw;
+    display: flex;
+    flex-direction: column;
+    margin: 2vh 2vw;
+    height: 27vh;
+    & > button {
+        font-size: 1.3vw;
+        width: 7vw;
+    }
+    & > * {
+        margin: 0.4vw;
+    }
+`;
+export {
+    MyWrap,
+    Left,
+    Right,
+    Title,
+    Label,
+    Input,
+    Wrap,
+    Select,
+    Reserved,
+    RightWrap,
+    AirWrap,
+    HotelWrap,
+    PackageWrap,
+};

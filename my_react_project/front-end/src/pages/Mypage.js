@@ -10,6 +10,9 @@ import {
     Select,
     Reserved,
     RightWrap,
+    AirWrap,
+    HotelWrap,
+    PackageWrap,
 } from "../styles/MypageStyle";
 import { Button } from "../styles/CommonStyle";
 import { useDispatch, useSelector } from "react-redux";
@@ -79,6 +82,7 @@ const Mypage = () => {
     // 로그인유저 정보 불러오기
     dispatch(mypageAction.get_userInfo(id));
     const user = useSelector((state) => state.userInfo);
+    const date = user.air_date.substr(0, 10);
 
     // 예약취소 버튼 함수
     const package_cancel = () => {
@@ -139,9 +143,9 @@ const Mypage = () => {
                 <Title>예약 정보</Title>
                 <RightWrap>
                     {user.package && (
-                        <Wrap>
+                        <PackageWrap>
                             <Label>패키지</Label>
-                            {user.packge === "제주1d" ? (
+                            {user.package === "제주1d" ? (
                                 <Reserved>제주 당일치기</Reserved>
                             ) : user.package === "제주2d" ? (
                                 <Reserved>제주 1박2일</Reserved>
@@ -157,11 +161,11 @@ const Mypage = () => {
                                 ""
                             )}
                             <Button onClick={package_cancel}>예약 취소</Button>
-                        </Wrap>
+                        </PackageWrap>
                     )}
 
                     {user.hotel && (
-                        <Wrap>
+                        <HotelWrap>
                             <Label>호텔</Label>
                             {user.hotel === "jeju1d" ? (
                                 <Reserved>제주 1박</Reserved>
@@ -179,17 +183,24 @@ const Mypage = () => {
                                 ""
                             )}
                             <Button onClick={hotel_cancel}>예약 취소</Button>
-                        </Wrap>
+                        </HotelWrap>
                     )}
-                    
+
                     {user.air_seat && (
-                        <Wrap>
+                        <AirWrap>
                             <Label>항공</Label>
-                            <Reserved>air : {user.air_date}</Reserved>
-                            <Reserved>air : {user.air_destination}</Reserved>
-                            <Reserved>air : {user.air_seat}</Reserved>
+                            <Reserved>날짜 : {date}</Reserved>
+                            <Reserved>
+                                목적지 :{" "}
+                                {user.air_destination === "jeju"
+                                    ? "제주"
+                                    : user.air_destination === "yang"
+                                    ? "양양"
+                                    : ""}
+                            </Reserved>
+                            <Reserved>좌석 : {user.air_seat}</Reserved>
                             <Button onClick={air_cancel}>예약 취소</Button>
-                        </Wrap>
+                        </AirWrap>
                     )}
                 </RightWrap>
             </Right>

@@ -63,9 +63,22 @@ function get_userInfo(id) {
             const phone = user.data.phone;
             const email = user.data.email;
             const _package = user.data.package;
-            const air = user.data.air;
+            const air_date = user.data.air_date;
+            const air_destination = user.data.air_destination;
+            const air_seat = user.data.air_seat;
             const hotel = user.data.hotel;
-            dispatch({ type: "USER", payload: { phone, email, _package, air, hotel } });
+            dispatch({
+                type: "USER",
+                payload: {
+                    phone,
+                    email,
+                    _package,
+                    air_date,
+                    air_destination,
+                    air_seat,
+                    hotel,
+                },
+            });
         }
     };
 }

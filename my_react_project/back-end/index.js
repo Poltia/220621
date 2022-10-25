@@ -299,7 +299,7 @@ app.post("/air", async (req, res) => {
             res.send(err);
         });
 });
-// air 예약 확인하기
+// air 예약현황 확인하기
 app.post("/aircheck", async (req, res) => {
     const { destination, date } = req.body;
     const check = await User.findAll({

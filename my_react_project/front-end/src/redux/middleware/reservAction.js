@@ -116,6 +116,7 @@ function air(id, destination, date, seat, nav) {
         });
         if (reserve.data === true) {
             alert("항공 예약이 되었습니다.");
+            nav("/")
         } else {
             alert("항공 예약에 실패했습니다.");
             console.log(reserve.data);

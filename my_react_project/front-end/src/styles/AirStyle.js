@@ -7,18 +7,29 @@ const AirWrap = styled.div`
     transform: translate(-50%, -50%);
     display: flex;
     width: 80vw;
-    border: 1px solid black; //테두리
 `;
 
 const Left = styled.div`
     position: relative;
-    border: 1px solid black;
     width: 40vw;
     height: 75vh;
 `;
 
-const Select = styled.select``;
-const Date = styled.input``;
+const Select = styled.select`
+    font-size: 1.5vw;
+    height: 5vh;
+`;
+const Date = styled.input`
+    font-size: 1.5vw;
+    height: 4.6vh;
+`;
+const Destination = styled.div`
+    font-size: 1.5vw;
+    margin: 1vh 0;
+`;
+const PickDate = styled.div`
+    font-size: 1.5vw;
+`;
 const AirImg = styled.img`
     width: 39vw;
     position: absolute;
@@ -27,7 +38,7 @@ const AirImg = styled.img`
 `;
 
 const Right = styled.div`
-    border: 1px solid black; //테두리
+    position: relative;
     width: 40vw;
     & > div {
         position: relative;
@@ -36,6 +47,17 @@ const Right = styled.div`
         height: 30vh;
         font-size: 3vw;
         margin: 0 3vw 3vw;
+    }
+    & > span {
+        font-size: 2vw;
+        position: absolute;
+        left: 3vw;
+        bottom: 20vh;
+    }
+    & > button {
+        position: absolute;
+        left: 3vw;
+        bottom: 10vh;
     }
 `;
 
@@ -64,19 +86,20 @@ const Block = styled.div`
 `;
 
 const HiddenBlock = styled.div`
-    border: 1px solid black;
     font-size: 10px; //
     width: 2.5vw;
     height: 2.5vw;
 `;
 
 const ReservedBlock = styled.div`
+    color: white;
     border: 1px solid gray;
     border-radius: 1vw;
     background: red;
     font-size: 10px; //
     width: 2.5vw;
     height: 2.5vw;
+    text-align: center;
 `;
 
 export {
@@ -90,4 +113,6 @@ export {
     HiddenBlock,
     ReservedBlock,
     AirImg,
+    Destination,
+    PickDate,
 };
