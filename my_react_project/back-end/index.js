@@ -325,9 +325,12 @@ app.post("/packagecancel", async (req, res) => {
         });
 });
 // air 예약 취소
-app.post("aircancel", async (req, res) => {
+app.post("/aircancel", async (req, res) => {
     const { id } = req.body;
-    const cancel = await User.update({ air: null }, { where: { user_id: id } })
+    const cancel = await User.update(
+        { air_date: null, air_destination: null, air_seat: null },
+        { where: { user_id: id } }
+    )
         .then(() => {
             res.send(true);
         })

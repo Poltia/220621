@@ -82,7 +82,10 @@ const Mypage = () => {
     // 로그인유저 정보 불러오기
     dispatch(mypageAction.get_userInfo(id));
     const user = useSelector((state) => state.userInfo);
-    const date = user.air_date.substr(0, 10);
+    let date = "";
+    if (user.air_date !== null) {
+        date = user.air_date.substr(0, 10);
+    }
 
     // 예약취소 버튼 함수
     const package_cancel = () => {
