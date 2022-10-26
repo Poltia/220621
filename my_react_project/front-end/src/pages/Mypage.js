@@ -13,6 +13,7 @@ import {
     AirWrap,
     HotelWrap,
     PackageWrap,
+    LeftCover,
 } from "../styles/MypageStyle";
 import { Button } from "../styles/CommonStyle";
 import { useDispatch, useSelector } from "react-redux";
@@ -46,6 +47,10 @@ const Mypage = () => {
         setSelected(e.target.value);
     };
     const email = mail + "@" + selected;
+    const [coverPW, setCoverPW] = useState("");
+    const coverPW_input = (e) => {
+        setCoverPW(e.target.value);
+    };
 
     const id = sessionStorage.getItem("userID");
     // 버튼 클릭 실행 함수
@@ -98,49 +103,78 @@ const Mypage = () => {
         dispatch(mypageAction.hotel_cancel(id));
     };
 
+    // 회원정보 변경을 위한 비밀번호 확인
+    const check_btnClick = () => {
+        dispatch(mypageAction.check_for_InfoChange(id, coverPW));
+    };
+    const check = useSelector((state) => state.infoChange.changeInfo);
+
+    // enter 키로 로그인 함수 실행하기
+    const enterKeyPress = (e) => {
+        if (e.key === "Enter") {
+            return check_btnClick();
+        }
+    };
+
     return (
         <MyWrap>
-            <Left>
-                <Title>회원 정보</Title>
-                <Wrap>
-                    <Label>비밀번호</Label>
-                    <Input
-                        type="password"
-                        onChange={pw_input}
-                        placeholder="8~16자 영문 숫자 특수문자"
-                    />
-                    <Input
-                        type="password"
-                        onChange={checkPW_input}
-                        placeholder="위와 동일한 비밀번호를 입력해 주세요"
-                    />
-                    <Button onClick={pw_click}>변경하기</Button>
-                </Wrap>
-                <Wrap>
-                    <Label>
-                        전화번호
-                        <div>0{user.phone}</div>
-                    </Label>
-                    <Input onChange={phone_input} placeholder="숫자만 입력" />
-                    <Button onClick={phone_click}>변경하기</Button>
-                </Wrap>
-                <Wrap>
-                    <Label>
-                        이메일
-                        <div>{user.email}</div>
-                    </Label>
+            {check === true ? (
+                <Left>
+                    <Title>회원 정보</Title>
+                    <Wrap>
+                        <Label>비밀번호</Label>
+                        <Input
+                            type="password"
+                            onChange={pw_input}
+                            placeholder="8~16자 영문 숫자 특수문자"
+                        />
+                        <Input
+                            type="password"
+                            onChange={checkPW_input}
+                            placeholder="위와 동일한 비밀번호를 입력해 주세요"
+                        />
+                        <Button onClick={pw_click}>변경하기</Button>
+                    </Wrap>
+                    <Wrap>
+                        <Label>
+                            전화번호
+                            <div>0{user.phone}</div>
+                        </Label>
+                        <Input onChange={phone_input} placeholder="숫자만 입력" />
+                        <Button onClick={phone_click}>변경하기</Button>
+                    </Wrap>
+                    <Wrap>
+                        <Label>
+                            이메일
+                            <div>{user.email}</div>
+                        </Label>
+                        <div>
+                            <Input onChange={mail_input} />@
+                            <Select onChange={select}>
+                                <option value="">--선택--</option>
+                                <option value="gmail.com">gmail.com</option>
+                                <option value="naver.com">naver.com</option>
+                                <option value="daum.net">daum.net</option>
+                            </Select>
+                        </div>
+                        <Button onClick={email_click}>변경하기</Button>
+                    </Wrap>
+                </Left>
+            ) : (
+                <LeftCover>
+                    <Title>회원 정보</Title>
                     <div>
-                        <Input onChange={mail_input} />@
-                        <Select onChange={select}>
-                            <option value="">--선택--</option>
-                            <option value="gmail.com">gmail.com</option>
-                            <option value="naver.com">naver.com</option>
-                            <option value="daum.net">daum.net</option>
-                        </Select>
+                        <Label>회원 정보를 수정하려면 비밀번호를 입력해주세요.</Label>
+                        <Input
+                            type="password"
+                            onChange={coverPW_input}
+                            onKeyPress={enterKeyPress}
+                            autoFocus
+                        />
+                        <Button onClick={check_btnClick}>확인</Button>
                     </div>
-                    <Button onClick={email_click}>변경하기</Button>
-                </Wrap>
-            </Left>
+                </LeftCover>
+            )}
 
             <Right>
                 <Title>예약 정보</Title>

@@ -7,6 +7,25 @@ const MyWrap = styled.div`
     transform: translate(-50%, -50%);
     display: flex;
 `;
+const LeftCover = styled.div`
+    position: relative;
+    width: 40vw;
+    & > div {
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 30vw;
+        height: 20vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+    & > div > input {
+        width: 20vw;
+    }
+`;
 const Left = styled.div`
     position: relative;
     width: 40vw;
@@ -138,4 +157,5 @@ export {
     AirWrap,
     HotelWrap,
     PackageWrap,
+    LeftCover,
 };

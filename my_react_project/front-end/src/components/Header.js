@@ -70,7 +70,11 @@ const Header = ({ removeCookie }) => {
                 <Content onClick={() => nav("/review")}>후기</Content>
             </ContentsWrap>
             <ContentsWrap>
-                <Content>문의</Content>
+                {/* <Content
+                    onClick={isLogin ? nav("inquire") : alert("로그인 후 이용해주세요.")}
+                >
+                    문의
+                </Content> */}
                 {isLogin ? (
                     <>
                         <User onClick={() => nav("/mypage")}>{id}</User>

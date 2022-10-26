@@ -378,6 +378,24 @@ app.post("/list", async (req, res) => {
         });
 });
 
+// 회원정보 변경을 위한 비번 확인
+app.post("/checkinfo", async (req, res) => {
+    const { id, coverPW } = req.body;
+    const check = await User.findOne({ where: { user_id: id } }).then((e) => {
+        if (e) {
+            bcrypt.compare(coverPW, e.password, (err, same) => {
+                if (same) {
+                    res.send(true);
+                } else {
+                    res.send(err);
+                }
+            });
+        } else {
+            res.send(false);
+        }
+    });
+});
+
 app.listen(8000, () => {
     console.log("8000번 포트 사용중");
 });

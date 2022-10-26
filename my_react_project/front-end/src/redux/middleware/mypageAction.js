@@ -129,6 +129,22 @@ function hotel_cancel(id) {
     };
 }
 
+// 회원정보 변경을 위한 비밀번호 확인
+function check_for_InfoChange(id, coverPW) {
+    return async (dispatch, getState) => {
+        const check = await axios({
+            method: "post",
+            url: "http://localhost:8000/checkinfo",
+            data: { id, coverPW },
+        });
+        if (check.data === true) {
+            dispatch({ type: "CHANGE_INFO", payload: true });
+        } else {
+            console.log(check.data);
+        }
+    };
+}
+
 export const mypageAction = {
     password_change,
     phone_change,
@@ -137,4 +153,5 @@ export const mypageAction = {
     package_cancel,
     air_cancel,
     hotel_cancel,
+    check_for_InfoChange,
 };

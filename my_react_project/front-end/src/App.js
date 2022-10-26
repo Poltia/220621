@@ -12,6 +12,7 @@ import {
     Review,
     Write,
     Post,
+    Inquire,
 } from "./pages";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
@@ -50,6 +51,7 @@ function App() {
                 <Route path="/review" element={<Review />} />
                 <Route path="/write" element={<Write />} />
                 <Route path="/post" element={<Post />} />
+                <Route path="/inquire" element={<Inquire />} />
             </Routes>
         </>
     );

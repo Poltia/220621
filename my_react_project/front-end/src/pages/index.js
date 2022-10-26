@@ -9,6 +9,7 @@ import Hotel from "./Hotel";
 import Review from "./review/Review";
 import Write from "./review/Write";
 import Post from "./review/Post";
+import Inquire from "./Inquire";
 
 export {
     Main,
@@ -22,4 +23,5 @@ export {
     Review,
     Write,
     Post,
+    Inquire,
 };
