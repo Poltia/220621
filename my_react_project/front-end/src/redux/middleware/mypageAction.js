@@ -5,7 +5,7 @@ function password_change(id, password, nav) {
     return async (dispatch, getState) => {
         const pwChange = await axios({
             method: "post",
-            url: "http://localhost:8000/pwchange",
+            url: "http://192.168.0.245:8000/pwchange",
             data: { id, password },
         });
         if (pwChange.data === true) {
@@ -22,7 +22,7 @@ function phone_change(id, phone, nav) {
     return async (dispatch, getState) => {
         const phoneChange = await axios({
             method: "post",
-            url: "http://localhost:8000/phchange",
+            url: "http://192.168.0.245:8000/phchange",
             data: { id, phone },
         });
         if (phoneChange.data === true) {
@@ -39,7 +39,7 @@ function email_change(id, email, nav) {
     return async (dispatch, getState) => {
         const emailChange = await axios({
             method: "post",
-            url: "http://localhost:8000/emailchange",
+            url: "http://192.168.0.245:8000/emailchange",
             data: { id, email },
         });
         if (emailChange.data === true) {
@@ -56,7 +56,7 @@ function get_userInfo(id) {
     return async (dispatch, getState) => {
         const user = await axios({
             method: "post",
-            url: "http://localhost:8000/getuserinfo",
+            url: "http://192.168.0.245:8000/getuserinfo",
             data: { id },
         });
         if (user.data) {

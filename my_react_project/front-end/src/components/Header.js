@@ -22,7 +22,7 @@ const Header = ({ removeCookie }) => {
 
     return (
         <HeaderWrap>
-            <Content onClick={() => nav("/")}>메인</Content>
+            <Content onClick={() => nav("/")}>차니투어</Content>
             <ContentsWrap>
                 <Content
                     className={`list ${close ? "close" : "open"}`}

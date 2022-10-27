@@ -23,7 +23,7 @@ sequelize
 // 리액트 포트 연결
 const options = {
     // 허용 해줄 주소 ㄱ
-    origin: "http://localhost:3000",
+    origin: "http://192.168.0.245:3000",
 };
 app.use(cors(options));
 

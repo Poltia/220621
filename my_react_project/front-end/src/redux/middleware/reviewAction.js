@@ -5,7 +5,7 @@ function write(id, title, text, nav) {
     return async (dispatch, getState) => {
         const write = await axios({
             method: "post",
-            url: "http://localhost:8000/write",
+            url: "http://192.168.0.245:8000/write",
             data: { id, title, text },
         });
         if (write.data === true) {
@@ -23,7 +23,7 @@ function list() {
     return async (dispatch, getState) => {
         const _list = await axios({
             method: "post",
-            url: "http://localhost:8000/list",
+            url: "http://192.168.0.245:8000/list",
             data: null,
         });
         const list = _list.data;
