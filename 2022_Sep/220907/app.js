@@ -32,7 +32,7 @@
  * 
  * 데이터베이스 세팅
  * 1. 사용할 데이터베이스 하나 만들어준다.
- * create databases 이름;
+ * create database 이름;
  * 확인)show databases;
  * 
  * 이 데이터베이스를 사용해야하니까 유저를 만들어서 사용하자.
@@ -89,6 +89,9 @@
  * git remote add origin 깃 저장소 주소
  * pull 해서 갱신
  * 
+ * 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
+ * 
+ * 
  * node.js를 설치
  * sudo apt-get update
  * sudo apt-get install -y build-essential
@@ -107,8 +110,8 @@
  * http 80, https 443 포트
  * 
  * 명령어
- * sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3010
- * dport 80, --to-port 3010 >> 80번 포트로 접속하면 3010 포트로 재매핑
+ * sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3000
+ * dport 80, --to-port 3000 >> 80번 포트로 접속하면 3000 포트로 재매핑
  * 
  * 포트포워딩을 확인하는 명령어
  * sudo iptables -t nat -L --line-numbers
@@ -133,8 +136,8 @@
 // npx pm2 list : 리스트(npm start 하면 나왔던 표) 불러오기.
 
 // npx pm2 kill : pm2 종료
-
+///////////////////////////////////////
 // npx pm2 start app.js : app.js 실행
-
+/////////////////////////////////////
 // npx pm2 reload all : 서버 재시작
  */
