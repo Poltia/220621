@@ -39,7 +39,7 @@ function email_change(id, email, nav) {
     return async (dispatch, getState) => {
         const emailChange = await axios({
             method: "post",
-            url: "http://192.168.0.245:8000/emailchange",
+            url: "ㅊㅊㅊ/emailchange",
             data: { id, email },
         });
         if (emailChange.data === true) {
@@ -88,7 +88,7 @@ function package_cancel(id) {
     return async (dispatch, getState) => {
         const cancel = await axios({
             method: "post",
-            url: "http://localhost:8000/packagecancel",
+            url: "http://192.168.0.245:8000/packagecancel",
             data: { id },
         });
         if (cancel.data === true) {
@@ -103,7 +103,7 @@ function air_cancel(id) {
     return async (dispatch, getState) => {
         const cancel = await axios({
             method: "post",
-            url: "http://localhost:8000/aircancel",
+            url: "http://192.168.0.245:8000/aircancel",
             data: { id },
         });
         if (cancel.data === true) {
@@ -118,7 +118,7 @@ function hotel_cancel(id) {
     return async (dispatch, getState) => {
         const cancel = await axios({
             method: "post",
-            url: "http://localhost:8000/hotelcancel",
+            url: "http://192.168.0.245:8000/hotelcancel",
             data: { id },
         });
         if (cancel.data === true) {
@@ -134,7 +134,7 @@ function check_for_InfoChange(id, coverPW) {
     return async (dispatch, getState) => {
         const check = await axios({
             method: "post",
-            url: "http://localhost:8000/checkinfo",
+            url: "http://192.168.0.245:8000/checkinfo",
             data: { id, coverPW },
         });
         if (check.data === true) {

@@ -6,3 +6,4 @@ import yang from "./yang-beach.jpeg";
 import yang_tel from "./yang-motel.jpeg";
 
 export { air, move, jeju_tel, jeju, yang, yang_tel };
+ 

@@ -52,7 +52,7 @@ const Signup = () => {
         else {
             const idcheck = await axios({
                 method: "post",
-                url: "http://localhost:8000/idcheck",
+                url: "http://192.168.0.245:8000/idcheck",
                 data: { id },
             });
             if (!idcheck.data) alert("사용가능한 아이디입니다.");
