@@ -7,7 +7,7 @@ const config: Config.InitialOptions = {
         // 경로의 별칭 작성
         "^@core/(.*)$": "<rootDir>/src/core/$1",
     },
-    testEnvirionment: "node",
+    testEnvironment: "node",
     verbose: true, // 터미널에서 테스트 확인할지 여부
     preset: "ts-jest",
 };
