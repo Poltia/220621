@@ -22,7 +22,7 @@ export class P2PServer extends Chain {
     }
     // listen 서버에 들어왔을 때 (클라이언트 입장)
     listen() {
-        const server = new WebSocket.Server({ port: 5000 });
+        const server = new WebSocket.Server({ port: 7777 });
         server.on("connection", (socket) => {
             console.log("클라이언트 접속");
             this.connectSocket(socket);
