@@ -52,8 +52,8 @@ geth.ipc 파일을 사용해서 geth와 IPC 통신을 할 수 있게 된다.
 (geth가 실행되어있어야 생성되는 파일이므로 geth가 실행 되어있어야 한다!)
 
 통신을 하는 명령어
-// geth attach ~/Users/allen/Library/Ethereum/geth.ipc
-자바스트립트 콘솔창에 접속이 되고 go언어로 만들어 놓았고
+// geth attach ~/Library/Ethereum/geth.ipc
+자바스크립트 콘솔창에 접속이 되고 go언어로 만들어 놓았고
 자바스크립트로 호출해서 사용할 수 있게끔 만들어 놓은것
 
 personal을 콘솔에 입력 (모듈중 하나)
@@ -145,7 +145,7 @@ json파일을 가지고 geth 생성하기
 // geth --datadir node
 
 web3 통신하고
-IPC를 사요해서 로컬에 실행시킨 geth 프라이빗 네트워크를 블록체인 네트워크에서 메타마스크나 다른 pc도 텅신하려면 설정이 필요한데
+IPC를 사용해서 로컬에 실행시킨 geth 프라이빗 네트워크를 블록체인 네트워크에서 메타마스크나 다른 pc도 통신하려면 설정이 필요한데
 geth를 실행할 때 옵션을 설정해 주면 된다.
 
 설정 명령어
