@@ -157,7 +157,8 @@ geth를 실행할 때 옵션을 설정해 주면 된다.
 --networkId : 체인아이디와 동일한 값 입력 해주면 된다. 네트워크 아이디
 
 실행 명령어
-//설정// geth --datadir node --http --http.addr "0.0.0.0" --http.port 9000 --http.corsdomain "*" \ --http.api "admin,miner,txpool,web3,personal,eth,net" --syncmode full --networkid 1234
+//설정// geth --datadir node --http --http.addr "0.0.0.0" --http.port 9000 --http.corsdomain "*" \
+--http.api "admin,miner,txpool,web3,personal,eth,net" --syncmode full --networkid 1234
 //실행// geth attach http://127.0.0.1:9000
 
 프라이빗 네트워크에서 통신할 수 있는 상태가 되었고
@@ -169,5 +170,32 @@ nodejs나 메타마스크에서 프라이빗 네트워크에 통신하는 것이
 
 통신을 사용하기위해 web3 설치
 // npm install web3
+
+//
+코인베이스 계정으로 채굴하기
+코인베이스 계정을 마이너로 설정
+// miner.setEtherbase(eth.accounts[0])
+ => true
+
+채굴 시작
+// miner.start(1); // start(스레드 갯수);
+스레드는 인력이 많다는 뜻
+채굴 정지
+// miner.stop()
+
+코인베이스 계정의 채굴한 잔고를 확인해보자
+// eth.getBalance(eth.accounts[0])
+// web3.fromWei(eth.getBalance(eth.accounts[0]), "ether") // ether 단위로 변환해서 보여주게
+
+코인베이스 계정의 잔고에서 트랜잭션을 보내서 잔고를 보내보자
+// eth.sendTransaction({from: eth.accounts[0], to: eth.accounts[1], value: web3.toWei(10, "ether")})
+처음엔 잠금이 걸려있어서 전송 불가능...
+
+계정 잠금 해제하고 실행
+// geth --datadir node --http --allow-insecure-unlock --http.addr "0.0.0.0" --http.port 9000 --http.corsdomain "*" \
+--http.api "admin,miner,txpool,web3,personal,eth,net" --syncmode full --networkid 1234
+
+트랜잭션을 보내면 txpool(트랜잭션 풀)에 먼저 들어오고, 아직 트랜잭션이 pending 상태로 들어있고
+_마이닝을 실행_하면 트랜잭션 풀에서 트랜잭션이 처리가 된다.
 
 */
