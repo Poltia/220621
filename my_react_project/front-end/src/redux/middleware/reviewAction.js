@@ -1,11 +1,13 @@
 import axios from "axios";
 
+const URL = sessionStorage.getItem("URL");
+
 // 글 등록 //
 function write(id, title, text, nav) {
     return async (dispatch, getState) => {
         const write = await axios({
             method: "post",
-            url: "http://192.168.0.245:8000/write",
+            url: URL + ":8000/write",
             data: { id, title, text },
         });
         if (write.data === true) {
@@ -23,7 +25,7 @@ function list() {
     return async (dispatch, getState) => {
         const _list = await axios({
             method: "post",
-            url: "http://192.168.0.245:8000/list",
+            url: URL + ":8000/list",
             data: null,
         });
         const list = _list.data;

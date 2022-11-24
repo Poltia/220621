@@ -23,6 +23,7 @@ function App() {
     const nav = useNavigate();
     const dispatch = useDispatch();
     const id = sessionStorage.getItem("userID");
+    sessionStorage.setItem("URL", "http://localhost");
 
     // 쿠키
     const [cookies, setCookie, removeCookie] = useCookies(["refreshToken"]);

@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const URL = sessionStorage.getItem("URL");
+
 // 제주 패키지 예약시
 function jeju_package(selected, nav) {
     const id = sessionStorage.getItem("userID");
@@ -11,7 +13,7 @@ function jeju_package(selected, nav) {
         return async (dispatch, getState) => {
             const reserv = await axios({
                 method: "post",
-                url: "http://192.168.0.245:8000/jejupackage",
+                url: URL + ":8000/jejupackage",
                 data: { id, selected },
             });
             if (reserv.data) {
@@ -29,7 +31,7 @@ function jeju_package_check(selected) {
     return async (dispatch, getState) => {
         const check = await axios({
             method: "post",
-            url: "http://192.168.0.245:8000/jejupackagecheck",
+            url: URL + ":8000/jejupackagecheck",
             data: { selected },
         });
         const number = check.data.length;
@@ -48,7 +50,7 @@ function yang_package(selected, nav) {
     return async (dispatch, getState) => {
         const reserv = await axios({
             method: "post",
-            url: "http://192.168.0.245:8000/yangpackage",
+            url: URL + ":8000/yangpackage",
             data: { id, selected },
         });
         if (reserv.data) {
@@ -65,7 +67,7 @@ function yang_package_check(selected) {
     return async (dispatch, getState) => {
         const check = await axios({
             method: "post",
-            url: "http://192.168.0.245:8000/yangpackagecheck",
+            url: URL + ":8000/yangpackagecheck",
             data: { selected },
         });
         const number = check.data.length;
@@ -78,7 +80,7 @@ function hotel(id, place, day, nav) {
     return async (dispatch, getState) => {
         const reserve = await axios({
             method: "post",
-            url: "http://192.168.0.245:8000/hotelreserve",
+            url: URL + ":8000/hotelreserve",
             data: { id, place, day },
         });
         if (reserve.data === true) {
@@ -94,7 +96,7 @@ function hotel_check(place, day) {
     return async (dispatch, getState) => {
         const check = await axios({
             method: "post",
-            url: "http://192.168.0.245:8000/hotelcheck",
+            url: URL + ":8000/hotelcheck",
             data: { place, day },
         });
         if (!check.data) {
@@ -111,7 +113,7 @@ function air(id, destination, date, seat, nav) {
     return async (dispatch, getState) => {
         const reserve = await axios({
             method: "post",
-            url: "http://192.168.0.245:8000/air",
+            url: URL + ":8000/air",
             data: { id, destination, date, seat },
         });
         if (reserve.data === true) {
@@ -128,7 +130,7 @@ function air_check(destination, date) {
     return async (dispatch, getState) => {
         const check = await axios({
             method: "post",
-            url: "http://192.168.0.245:8000/aircheck",
+            url: URL + ":8000/aircheck",
             data: { destination, date },
         });
         if (check.data === false) {

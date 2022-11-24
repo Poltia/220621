@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const URL = sessionStorage.getItem("URL");
+
 // 토큰 확인 요청 함수
 function loginCheck(cookies, nav, id) {
     return async (dispatch, getState) => {
@@ -9,7 +11,7 @@ function loginCheck(cookies, nav, id) {
         const refresh = cookies.refreshToken;
         const token = await axios({
             method: "post",
-            url: "http://192.168.0.245:8000/tokencheck",
+            url: URL + ":8000/tokencheck",
             data: { access, refresh },
         });
         // console.log("relogin : " + token.data.relogin);
@@ -32,7 +34,7 @@ function login(id, password, nav, setCookie) {
     return async (dispatch, getState) => {
         const user = await axios({
             method: "post",
-            url: "http://192.168.0.245:8000/login",
+            url: URL + ":8000/login",
             data: { id, password },
         });
         // 만료시킬 시간 변수에 담기
@@ -75,7 +77,7 @@ function signup(id, password, phone, email) {
     return async (dispatch, getState) => {
         const user = await axios({
             method: "post",
-            url: "http://192.168.0.245:8000/signup",
+            url: URL + ":8000/signup",
             data: { id, password, phone, email },
         });
         alert(user.data);

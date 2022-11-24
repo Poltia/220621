@@ -12,7 +12,7 @@ const app = express();
 
 // sequelize 연결 및 테이블 생성
 sequelize
-    .sync({ force: false }) // 초기화 하는 곳!
+    .sync({ force: false }) // BD 초기화 하는 곳!
     .then(() => {
         console.log("DB 연결");
     })
@@ -23,7 +23,7 @@ sequelize
 // 리액트 포트 연결
 const options = {
     // 허용 해줄 주소 ㄱ
-    origin: "http://192.168.0.245:3000",
+    origin: "http://localhost:3000",
 };
 app.use(cors(options));
 

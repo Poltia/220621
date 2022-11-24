@@ -1,11 +1,13 @@
 import axios from "axios";
 
+const URL = sessionStorage.getItem("URL");
+
 // 비밀번호 변경
 function password_change(id, password, nav) {
     return async (dispatch, getState) => {
         const pwChange = await axios({
             method: "post",
-            url: "http://192.168.0.245:8000/pwchange",
+            url: URL + ":8000/pwchange",
             data: { id, password },
         });
         if (pwChange.data === true) {
@@ -22,7 +24,7 @@ function phone_change(id, phone, nav) {
     return async (dispatch, getState) => {
         const phoneChange = await axios({
             method: "post",
-            url: "http://192.168.0.245:8000/phchange",
+            url: URL + ":8000/phchange",
             data: { id, phone },
         });
         if (phoneChange.data === true) {
@@ -39,7 +41,7 @@ function email_change(id, email, nav) {
     return async (dispatch, getState) => {
         const emailChange = await axios({
             method: "post",
-            url: "ㅊㅊㅊ/emailchange",
+            url: URL + "/emailchange",
             data: { id, email },
         });
         if (emailChange.data === true) {
@@ -56,7 +58,7 @@ function get_userInfo(id) {
     return async (dispatch, getState) => {
         const user = await axios({
             method: "post",
-            url: "http://192.168.0.245:8000/getuserinfo",
+            url: URL + ":8000/getuserinfo",
             data: { id },
         });
         if (user.data) {
@@ -88,7 +90,7 @@ function package_cancel(id) {
     return async (dispatch, getState) => {
         const cancel = await axios({
             method: "post",
-            url: "http://192.168.0.245:8000/packagecancel",
+            url: URL + ":8000/packagecancel",
             data: { id },
         });
         if (cancel.data === true) {
@@ -103,7 +105,7 @@ function air_cancel(id) {
     return async (dispatch, getState) => {
         const cancel = await axios({
             method: "post",
-            url: "http://192.168.0.245:8000/aircancel",
+            url: URL + ":8000/aircancel",
             data: { id },
         });
         if (cancel.data === true) {
@@ -118,7 +120,7 @@ function hotel_cancel(id) {
     return async (dispatch, getState) => {
         const cancel = await axios({
             method: "post",
-            url: "http://192.168.0.245:8000/hotelcancel",
+            url: URL + ":8000/hotelcancel",
             data: { id },
         });
         if (cancel.data === true) {
@@ -134,7 +136,7 @@ function check_for_InfoChange(id, coverPW) {
     return async (dispatch, getState) => {
         const check = await axios({
             method: "post",
-            url: "http://192.168.0.245:8000/checkinfo",
+            url: URL + ":8000/checkinfo",
             data: { id, coverPW },
         });
         if (check.data === true) {
