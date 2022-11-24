@@ -198,4 +198,70 @@ nodejs나 메타마스크에서 프라이빗 네트워크에 통신하는 것이
 트랜잭션을 보내면 txpool(트랜잭션 풀)에 먼저 들어오고, 아직 트랜잭션이 pending 상태로 들어있고
 _마이닝을 실행_하면 트랜잭션 풀에서 트랜잭션이 처리가 된다.
 
+//
+.abi : 스마트 컨트랙트 안에 매개변수나 함수들을 json 형식으로 나타낸 리스트
+함수를 호출하거나 데이터를 호출해서 받을 수 있다.
+실제로 스마트 컨트랙트 안에서는 바이트 코드로 변환되어서 담겨 있다.
+.bin : 컴파일된 바이트 코드 내용. 이더리움 네트워크 상에 배포
+
+특정 계정 unlock 시키기
+// geth --datadir node --http --http.addr "127.0.0.1" --http.port 9000 --http.corsdomain "*" \
+--http.api "admin,eth,debug,miner,net,txpool,personal,web3" --syncmode full --networkid 1234 \
+--port 30300 --ws --ws.addr "127.0.0.1" --ws.port 9005 --ws.origins "*" \
+--ws.api "admin,eth,debug,miner,net,txpool,personal,web3" \
+--allow-insecure-unlock --unlock "0,1" --password "./node/password.txt"
+
+자바스크립트 콘솔창에
+bytecode 변수에 값을 할당
+// bytecode="0x솔리디티로 컴파일한 .bin파일 내용을 넣어준다"
+abi 변수에 값을 할당
+// abi=솔리디티로 컴파일한 .abi 파일 내용을 넣어준다
+
+트랜잭션 객체를 만들어준다
+from 키값과 data 키값으로 객체를 생성해준다.
+// txObject = { from: eth.coinbase, data: bytecode }
+// eth.sendTransaction(위에서 만든 트랜잭션 객체 txObject)
+
+트랜잭션 해시
+// "0x50b343a73947a95748bc76f9837eee5068169d8059c65ee1275535a5ac5ccbec"
+
+확인하기
+// eth.getTransaction(트랜잭션의 해쉬값)
+
+EOA: 개인키를 가지고 트랜잭션을 생성하고 서명하는 것
+CA: 개인키 없이 트랜잭션 응답으로만 트랜잭션을 실행
+
+CA 안에 스마트 컨트랙트 내용이 담겨있어서 CA에 있는 코드 해시값을 통해서 스마트 컨트랙트 코드에 접근이 가능하다.
+CA 라는 건 스마트 컨트랙트가 배포 되어있을때 생긴다.
+스마트 컨트랙트를 배포해서 생긴 CA를 조회해서 contractAddress를 사용
+
+contractAddress는 스마트 컨트랙트 안에 작성된 함수나 변수를 호출해서 값을 가져올 때 사용하고
+스마트 컨트랙트에 접근하기 위해서는 CA 값이 있어야한다.
+
+contract 변수에 eth.contract(위의 abi 값) 할당
+// contract = eth.contract(abi)
+contract.at()를 사용해서 스마트 컨트랙트 코드에 접근이 가능하다
+
+contractAddress 값은 eth.getTransactionReceipt("트랜잭션 해시")를 입력해서 확인가능
+contractAddress: "0x497924b1ce3cb875c2730f38b5c18d7831e6b3f6"
+
+instance 변수에 contract.at(contractAddress 값) 할당
+// instance = contract.at(contractAddress 값)
+
+// instance.getText.call()
+ => "Hello World!"
+call()는 데이터를 불러오는 함수
+값을 전달해서 상태 변수를 바꾸는건 send()
+
+상태 변수를 가져오는 것과 변경하는 것은 차이가 있는데
+상태변수의 값을 바꾼다는 건 저장 공간에 값이 달라진다는 것이기 때문에
+네트워크에서 저장공간은 한계가 있어 저장 용량을 바꾸기 위해서 추가적으로 비용을 지불해야 한다.
+EVM을 실행시키기 위한 비용을 지불하는것
+상태변수의 값을 바꾸려면 트랜잭션을 발생시켜 수수료를 지불 해야한다.
+
+트랜잭션을 보내서 배포하고 마이닝해서 트랜잭션 처리하고 setText() 실행
+상태 변수 값 변경
+// instance = contract.new(txObject)
+// instance.setText("Woo Yang Chan", {from:eth.coinbase})
+
 */
