@@ -4,6 +4,10 @@ pragma solidity ^0.8.17;
 contract Counter {
     uint256 private _count;
 
+    // 이벤트를 등록하려면 event를 사용해서 (로그를 찍겠다고...)
+    event Count(uint256 count);
+    // 이벤트를 등록하면 본인이 실행하고 싶을 때(언제 로그를 찍을지) 작성해주면 된다.
+
     // view는 상태 변수를 변경하는게 아니라 데이터를 읽기만 하는것.
     function current() public view returns(uint256){
         return _count;
@@ -11,6 +15,7 @@ contract Counter {
 
     function increment() public {
         _count += 1;
+        emit Count(_count); // 변한 상태변수의 값이 로그에 찍힌다.
     }
 
     function decrement() public {
