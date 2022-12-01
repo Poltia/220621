@@ -23,4 +23,6 @@ let sample = Hi;
 ### 이미지 추가
 ![working_ryan](https://user-images.githubusercontent.com/107897852/174938371-09b9c4b0-e95a-4fa1-bbbd-73b04d8fdef8.gif)
 
-수정
+### badge/ icon
+<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+<img src="https://img.shields.io/badge/JavaScript-FCC624?style=for-the-badge&logo=javascript&logoColor=black">
