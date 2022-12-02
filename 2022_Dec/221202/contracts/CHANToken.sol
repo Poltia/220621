@@ -1,10 +1,10 @@
-// SDPX-License-Identifier: MIT
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
 // 컨트랙트 파일 전체 코드 가져오기 import
 import "./ERC20.sol";
 
-// 컨트랙트 상속 is 로, Token에 REC20를 상속
+// 컨트랙트 상속 is 로, Token에 ERC20을 상속
 contract CHANToken is ERC20 {
     address public owner; // 이 컨트랙트의 배포자가 할당될 상태변수
     uint256 public ethCanBuy = 200; // 1ETH 당 200토큰으로 정해줄 상태변수
