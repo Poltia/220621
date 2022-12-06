@@ -20,7 +20,7 @@ contract Minting is ERC721 {
         // pure : state값을 변경할 수 없다.이 함수 밖에 있는 값을 읽어올 수도 없다.
         // 반환값은 만들어서 넣어줄 json 객체
         return
-            "https://gateway.pinata.cloud/ipfs/QmXRE9Pe3mNMMHuLsDxzo9Q2UmX18wArgHdVf7mFiVFeY1";
+            "https://gateway.pinata.cloud/ipfs/QmSqMVH4XMMcnAP3i7unSjerXHtnyJYWcMgqw6F57aA9sG";
 
         /* NFT 객체의 내용 ㄱ
         {
