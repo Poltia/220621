@@ -1,0 +1,15 @@
+{
+    "name": "Chan NFT",
+    "description": "Chan's self-shot",
+    "image": "https://gateway.pinata.cloud/ipfs/QmfVWF2GJBSJn6nmW1N4AeTESnVxwnNfHfCMK4CmhWzU6Q",
+    "attributes": [
+      {
+        "trait_type": "Rank",
+        "value": 1
+      },
+      {
+        "trait_type": "Type",
+        "value": 1
+      }
+    ]
+  }
