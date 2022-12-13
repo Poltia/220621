@@ -3,15 +3,15 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { BlockAction } from "../redux/middleware/BlockAction";
 
-const NumberList = (list) => {
+const NumberList = ({ block }) => {
     const nav = useNavigate();
     const dispatch = useDispatch();
 
     const onClick = () => {
-        dispatch(BlockAction.BlockInfo(list.block.number, nav));
+        dispatch(BlockAction.BlockInfo(block.number, nav));
     };
 
-    return <li onClick={onClick}>block number : {list.block.number}</li>;
+    return <li onClick={onClick}>block number : {block.number}</li>;
 };
 
 export default NumberList;

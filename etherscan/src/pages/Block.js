@@ -1,8 +1,22 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import TxList from "../components/TxList";
+import { TxAction } from "../redux/middleware/TxAction";
 
 const Block = () => {
+    const nav = useNavigate();
+    const dispatch = useDispatch();
+
+    // 트랜잭션 목록 불러오는 함수
+    const TxListCheck = () => {
+        dispatch(TxAction.TxList(block.number));
+    };
+
+    // 블록 정보 가져오기
     const block = useSelector((state) => state.BlockInfo);
+    // 해당 블록의 트랜잭션 가져오기
+    const txList = useSelector((state) => state.TxList.Tx);
 
     return (
         <>
@@ -77,8 +91,14 @@ const Block = () => {
                     <td>{block.size == null && "null"}</td>
                 </tr>
             </table>
+            <button onClick={TxListCheck}>{block.number}번 블록 트랜잭션 조회하기</button>
             <div>
-                <button>{block.number}번 블록 트랜잭션 조회하기</button>
+                <div>Transactions List</div>
+                <div>
+                    {txList.map((el, index) => {
+                        return <TxList key={index} tx={el} index={index} />;
+                    })}
+                </div>
             </div>
         </>
     );

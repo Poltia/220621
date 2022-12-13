@@ -63,6 +63,8 @@ web3.eth.subscribe("newBlockHeaders", function (error, result) {
 app.post("/blocknumbers", async (req, res) => {
     const blocks = await Block.findAll({
         attributes: [/*"id", */ "number"],
+        order: [["number", "DESC"]], // 정렬
+        limit: 25, // 가져올 갯수 제한
     });
     res.send(blocks);
 });
@@ -75,6 +77,20 @@ app.post("/block", async (req, res) => {
     }).then((e) => {
         res.send(e);
     });
+});
+
+// 트랜잭션 목록 불러오기
+app.post("/txlist", async (req, res) => {
+    const { blockNumber } = req.body;
+    const Tx = await web3.eth.getBlock(blockNumber);
+    res.send(Tx);
+});
+
+// 해당 트랜잭션 정보 가져오기
+app.post("/txinfo", async (req, res) => {
+    const { tx } = req.body;
+    const transaction = await web3.eth.getTransaction(tx);
+    res.send(transaction);
 });
 
 // // // // // // //

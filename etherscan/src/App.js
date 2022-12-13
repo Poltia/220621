@@ -1,7 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Block from "./pages/Block";
 import Main from "./pages/Main";
+import Block from "./pages/Block";
+import TxInfo from "./pages/TxInfo";
 
 function App() {
     // const [blockNumbers, setBlockNumbers] = useState();
@@ -24,6 +25,7 @@ function App() {
             <Routes>
                 <Route index element={<Main />} />
                 <Route path="/block" element={<Block />} />
+                <Route path="/txinfo" element={<TxInfo />} />
             </Routes>
         </>
     );
