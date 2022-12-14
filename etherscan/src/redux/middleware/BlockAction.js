@@ -22,4 +22,16 @@ function BlockInfo(number, nav) {
     };
 }
 
-export const BlockAction = { numberList, BlockInfo };
+function lookupBlock(number, nav) {
+    return async (dispatch, getState) => {
+        const block = await axios({
+            method: "post",
+            url: "http://localhost:4000/lookupblock",
+            data: { number },
+        });
+        dispatch({ type: "BLOCK", payload: block.data });
+        nav("/block");
+    };
+}
+
+export const BlockAction = { numberList, BlockInfo, lookupBlock };

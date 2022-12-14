@@ -3,6 +3,7 @@ const express = require("express");
 const session = require("express-session");
 const http = require("http");
 const Web3 = require("web3");
+const { Miner } = require("web3-eth-miner");
 const cors = require("cors");
 const { sequelize, Block } = require("./sequelize");
 
@@ -27,6 +28,9 @@ app.use(express.json());
 
 // web3 생성 및 연결
 const web3 = new Web3(new Web3.providers.WebsocketProvider("ws://127.0.0.1:9005"));
+
+//
+const miner = new Miner("http://localhost:9000", null);
 
 // 새로운 블록 생성시
 web3.eth.subscribe("newBlockHeaders", function (error, result) {
@@ -93,17 +97,31 @@ app.post("/txinfo", async (req, res) => {
     res.send(transaction);
 });
 
-// // // // // // //
+// 블록 번호로 조회해서 정보 가져오기
+app.post("/lookupblock", async (req, res) => {
+    const { number } = req.body;
+    const block = await web3.eth.getBlock(number);
+    res.send(block);
+});
+
+// miner start 실행하기
+app.post("/minerstart", async (req, res) => {
+    console.log(miner);
+
+    // res.send(true);
+});
+
+// // // // // // // // // //
 app.get("/test", async (req, res) => {
     const accounts = await web3.eth.getAccounts();
     const blockNum = (await web3.eth.getBlockNumber()) - 9;
     const blockHash = await web3.eth.getBlock(blockNum);
-    const transaction = await web3.eth.getTransaction(
+    const transactionInfo = await web3.eth.getTransaction(
         "0xf53fe1de424e981f9b0ab20f4290a24a048d1a7c8ce36e3ad8a73cefcfafee26"
     );
-    res.send(transaction);
+    res.send(blockHash);
 });
-// // // // // // //
+// // // // // // // // // //
 
 app.listen(4000, () => {
     console.log("Server Connected From port 4000");
