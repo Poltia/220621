@@ -4,6 +4,14 @@ import { BlockAction } from "../redux/middleware/BlockAction";
 import { MinerAction } from "../redux/middleware/MinerAction";
 import NumberList from "../components/NumberList";
 import { useNavigate } from "react-router-dom";
+import {
+    MainWrap,
+    Left,
+    Right,
+    MiningStart,
+    MiningStop,
+    LookupWrap,
+} from "../styles/MainStyle";
 
 const Main = () => {
     // Hook 불러오기
@@ -26,10 +34,10 @@ const Main = () => {
     // Mining 시작 버튼 클릭 함수
     const minerStart = () => {
         dispatch(MinerAction.start());
-    }
-    
+    };
+
     // mining 활성화 확인 변수
-    const mining = useSelector((state)=>state.Mining.mining);
+    const mining = useSelector((state) => state.Mining.mining);
 
     // 처음 랜더링할때
     useEffect(() => {
@@ -38,23 +46,26 @@ const Main = () => {
     }, []);
 
     return (
-        <>
-            <div>
-                <button onClick={minerStart}>Mining 시작</button>
-                <button>Mining 중지</button>
-            </div>
-            <div>최신 블록</div>
-            <div>
-                {numberList.map((el, index) => (
-                    <NumberList key={index} block={el} />
-                ))}
-            </div>
-            <div>
-                <div>조회할 블록 번호</div>
-                <input type="number" onChange={lookupNumber} />
-                <button onClick={lookupBtn}>조회</button>
-            </div>
-        </>
+        <MainWrap>
+            <Left>
+                <h1>Latest Block List</h1>
+                <div>
+                    {numberList.map((el, index) => (
+                        <NumberList key={index} block={el} />
+                    ))}
+                </div>
+            </Left>
+            <Right>
+                {/* 클릭하면 시작 <-> 중지 되게 만들어 놓자 */}
+                <MiningStart onClick={minerStart}>Mining Start</MiningStart>
+                <MiningStop>Mining Stop</MiningStop>
+                <LookupWrap>
+                    <div>Search for Block Number</div>
+                    <input type="number" onChange={lookupNumber} />
+                    <span onClick={lookupBtn}>Search</span>
+                </LookupWrap>
+            </Right>
+        </MainWrap>
     );
 };
 

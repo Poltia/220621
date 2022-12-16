@@ -3,7 +3,8 @@ const express = require("express");
 const session = require("express-session");
 const http = require("http");
 const Web3 = require("web3");
-const { Miner } = require("web3-eth-miner");
+// const { Miner } = require("web3-eth-miner");
+// const Web3Admin = require("web3admin");
 const cors = require("cors");
 const { sequelize, Block } = require("./sequelize");
 
@@ -28,9 +29,14 @@ app.use(express.json());
 
 // web3 생성 및 연결
 const web3 = new Web3(new Web3.providers.WebsocketProvider("ws://127.0.0.1:9005"));
+//
+// const web3admin = new Web3();
+// setTimeout(function () {
+//     Web3Admin.extend(web3);
+// }, 1000);
 
 //
-const miner = new Miner("http://localhost:9000", null);
+// const miner = new Miner("http://localhost:9000");
 
 // 새로운 블록 생성시
 web3.eth.subscribe("newBlockHeaders", function (error, result) {
@@ -106,7 +112,10 @@ app.post("/lookupblock", async (req, res) => {
 
 // miner start 실행하기
 app.post("/minerstart", async (req, res) => {
-    console.log(miner);
+    console.log(web3.eth);
+    // await web3.miner.startMining(1, (err, res) => {
+    //     console.log(res);
+    // });
 
     // res.send(true);
 });

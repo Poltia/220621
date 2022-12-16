@@ -2,6 +2,8 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { TxAction } from "../redux/middleware/TxAction";
+import { Tx } from "../styles/BlockStyle";
+
 
 const TxList = ({ tx, index }) => {
     const nav = useNavigate();
@@ -12,9 +14,9 @@ const TxList = ({ tx, index }) => {
     };
 
     return (
-        <div onClick={onClick}>
-            {index + 1} : {tx}
-        </div>
+        <Tx onClick={onClick}>
+            No.{index + 1} : {tx}
+        </Tx>
     );
 };
 

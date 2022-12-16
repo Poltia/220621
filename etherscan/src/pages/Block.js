@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import TxList from "../components/TxList";
 import { TxAction } from "../redux/middleware/TxAction";
+import { BlockWrap, TD, TxBtn } from "../styles/BlockStyle";
 
 const Block = () => {
     const nav = useNavigate();
@@ -23,89 +24,92 @@ const Block = () => {
     const txList = useSelector((state) => state.TxList.Tx);
 
     return (
-        <>
-            <div>{block.number} Block Info.</div>
+        <BlockWrap>
+            <h1>{block.number} Block Info.</h1>
             <table>
                 <tr>
-                    <td>parentHash</td>
+                    <TD>parentHash</TD>
                     <td>{block.parentHash}</td>
                 </tr>
                 <tr>
-                    <td>sha3Uncles</td>
+                    <TD>sha3Uncles</TD>
                     <td>{block.sha3Uncles}</td>
                 </tr>
                 <tr>
-                    <td>miner</td>
+                    <TD>miner</TD>
                     <td>{block.miner}</td>
                 </tr>
                 <tr>
-                    <td>stateRoot</td>
+                    <TD>stateRoot</TD>
                     <td>{block.stateRoot}</td>
                 </tr>
                 <tr>
-                    <td>transactionsRoot</td>
+                    <TD>transactionsRoot</TD>
                     <td>{block.transactionsRoot}</td>
                 </tr>
                 <tr>
-                    <td>receiptsRoot</td>
+                    <TD>receiptsRoot</TD>
                     <td>{block.receiptsRoot}</td>
                 </tr>
                 <tr>
-                    <td>difficulty</td>
+                    <TD>difficulty</TD>
                     <td>{block.difficulty}</td>
                 </tr>
                 <tr>
-                    <td>number</td>
+                    <TD>number</TD>
                     <td>{block.number}</td>
                 </tr>
                 <tr>
-                    <td>gasLimit</td>
+                    <TD>gasLimit</TD>
                     <td>{block.gasLimit}</td>
                 </tr>
                 <tr>
-                    <td>gasUsed</td>
+                    <TD>gasUsed</TD>
                     <td>{block.gasUsed}</td>
                 </tr>
                 <tr>
-                    <td>timestamp</td>
+                    <TD>timestamp</TD>
                     <td>{block.timestamp}</td>
                 </tr>
                 <tr>
-                    <td>extraData</td>
+                    <TD>extraData</TD>
                     <td>{block.extraData}</td>
                 </tr>
                 <tr>
-                    <td>mixHash</td>
+                    <TD>mixHash</TD>
                     <td>{block.mixHash}</td>
                 </tr>
                 <tr>
-                    <td>nonce</td>
+                    <TD>nonce</TD>
                     <td>{block.nonce}</td>
                 </tr>
                 <tr>
-                    <td>baseFeePerGas</td>
+                    <TD>baseFeePerGas</TD>
                     <td>{block.baseFeePerGas == null && "null"}</td>
                 </tr>
                 <tr>
-                    <td>hash</td>
+                    <TD>hash</TD>
                     <td>{block.hash}</td>
                 </tr>
                 <tr>
-                    <td>size</td>
+                    <TD>size</TD>
                     <td>{block.size == null && "null"}</td>
                 </tr>
             </table>
-            <button onClick={TxListCheck}>{block.number}번 블록 트랜잭션 조회하기</button>
+
+            <TxBtn onClick={TxListCheck}>
+                Show No.{block.number} Block's Transactions list
+            </TxBtn>
             {!close && txList.length == 0 ? (
                 <div>
-                    <div>Transactions List</div>
+                    <h2>Transactions List</h2>
                     <div>There's no transactions</div>
                 </div>
             ) : close ? (
                 <div></div>
             ) : (
                 <div>
-                    <div>Transactions List</div>
+                    <h2>Transactions List</h2>
                     <div>
                         {txList.map((el, index) => (
                             <TxList key={index} tx={el} index={index} />
@@ -113,7 +117,7 @@ const Block = () => {
                     </div>
                 </div>
             )}
-        </>
+        </BlockWrap>
     );
 };
 
