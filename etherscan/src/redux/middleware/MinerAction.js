@@ -2,16 +2,33 @@ import axios from "axios";
 
 function start() {
     return async (dispatch, getState) => {
-        const mining = await axios({
-            method: "post",
-            url: "http://localhost:4000/minerstart",
-        });
-        dispatch({ type: "MINING", payload: mining.data });
-        console.log(mining);
+        const mining = await axios
+            .post("http://localhost:9000", {
+                jsonrpc: "2.0",
+                id: 1,
+                method: "miner_start",
+                params: [1],
+            })
+            .then(() => {
+                dispatch({ type: "MINING", payload: true });
+            });
     };
 }
 
-function stop() {}
+function stop() {
+    return async (dispatch, getState) => {
+        const mining = await axios
+            .post("http://localhost:9000", {
+                jsonrpc: "2.0",
+                id: 1,
+                method: "miner_stop",
+                params: [],
+            })
+            .then(() => {
+                dispatch({ type: "MINING", payload: false });
+            });
+    };
+}
 
 export const MinerAction = { start, stop };
 

@@ -12,6 +12,7 @@ import {
     MiningStop,
     LookupWrap,
 } from "../styles/MainStyle";
+import Web3 from "web3/dist/web3.min";
 
 const Main = () => {
     // Hook 불러오기
@@ -31,24 +32,38 @@ const Main = () => {
         dispatch(BlockAction.lookupBlock(number, nav));
     };
 
-    // Mining 시작 버튼 클릭 함수
+    // Mining start 버튼 클릭 함수
     const minerStart = () => {
         dispatch(MinerAction.start());
+    };
+    // Mining stop 버튼 클릭 함수
+    const minerStop = () => {
+        dispatch(MinerAction.stop());
     };
 
     // mining 활성화 확인 변수
     const mining = useSelector((state) => state.Mining.mining);
 
+    // web3 생성 및 연결
+    const web3 = new Web3(new Web3.providers.WebsocketProvider("ws://127.0.0.1:9005"));
+    // 새로운 블록 생성시
+    web3.eth.subscribe("newBlockHeaders", function (error, result) {
+        // 블록 번호 목록 리덕스에 담기
+        dispatch(BlockAction.numberList());
+    });
+
     // 처음 랜더링할때
     useEffect(() => {
         // 블록 번호 목록 리덕스에 담기
         dispatch(BlockAction.numberList());
+        // 새로고침하면 miner.stop() 되게
+        dispatch(MinerAction.stop());
     }, []);
 
     return (
         <MainWrap>
             <Left>
-                <h1>Latest Block List</h1>
+                <h1>Latest Block List (25)</h1>
                 <div>
                     {numberList.map((el, index) => (
                         <NumberList key={index} block={el} />
@@ -56,11 +71,13 @@ const Main = () => {
                 </div>
             </Left>
             <Right>
-                {/* 클릭하면 시작 <-> 중지 되게 만들어 놓자 */}
-                <MiningStart onClick={minerStart}>Mining Start</MiningStart>
-                <MiningStop>Mining Stop</MiningStop>
+                {mining ? (
+                    <MiningStop onClick={minerStop}>Mining Stop</MiningStop>
+                ) : (
+                    <MiningStart onClick={minerStart}>Mining Start</MiningStart>
+                )}
                 <LookupWrap>
-                    <div>Search for Block Number</div>
+                    <div>Enter the Block Number</div>
                     <input type="number" onChange={lookupNumber} />
                     <span onClick={lookupBtn}>Search</span>
                 </LookupWrap>
