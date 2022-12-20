@@ -27,5 +27,5 @@ let sample = Hi;
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 <img src="https://img.shields.io/badge/JavaScript-FCC624?style=for-the-badge&logo=javascript&logoColor=black">
 
-### [배지 디자인 참고 사이트](https://shields.io/)
+배지 디자인 참고 사이트 : https://shields.io/
 아이콘 디자인 참고 사이트 : https://simpleicons.org/
