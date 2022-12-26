@@ -25,7 +25,7 @@ app.use(cors(options));
 app.use(express.json());
 
 // web3 생성 및 연결
-const web3 = new Web3(new Web3.providers.WebsocketProvider("ws://127.0.0.1:9005"));
+const web3 = new Web3(new Web3.providers.WebsocketProvider("ws://192.168.0.243:9005"));
 
 // 새로운 블록 생성시
 web3.eth.subscribe("newBlockHeaders", function (error, result) {

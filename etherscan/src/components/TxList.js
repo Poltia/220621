@@ -15,7 +15,7 @@ const TxList = ({ tx, index }) => {
 
     return (
         <Tx onClick={onClick}>
-            No.{index + 1} : {tx}
+            TxNo.{index + 1} : {tx}
         </Tx>
     );
 };

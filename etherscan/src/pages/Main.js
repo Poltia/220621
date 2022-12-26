@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Web3 from "web3/dist/web3.min";
 import { BlockAction } from "../redux/middleware/BlockAction";
 import { MinerAction } from "../redux/middleware/MinerAction";
 import NumberList from "../components/NumberList";
-import { useNavigate } from "react-router-dom";
 import {
     MainWrap,
     Left,
@@ -12,7 +13,6 @@ import {
     MiningStop,
     LookupWrap,
 } from "../styles/MainStyle";
-import Web3 from "web3/dist/web3.min";
 
 const Main = () => {
     // Hook 불러오기
@@ -45,7 +45,7 @@ const Main = () => {
     const mining = useSelector((state) => state.Mining.mining);
 
     // web3 생성 및 연결
-    const web3 = new Web3(new Web3.providers.WebsocketProvider("ws://127.0.0.1:9005"));
+    const web3 = new Web3(new Web3.providers.WebsocketProvider("ws://192.168.0.243:9005"));
     // 새로운 블록 생성시
     web3.eth.subscribe("newBlockHeaders", function (error, result) {
         // 블록 번호 목록 리덕스에 담기

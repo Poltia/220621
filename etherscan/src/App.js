@@ -20,6 +20,21 @@ function App() {
     //         console.log(numbers.data[1].number);
     //     })();
     // }, []);
+
+    sessionStorage.setItem("URL", "http://192.168.0.243");
+    /*
+geth --datadir node --http --http.addr "192.168.0.243" --http.port 9000 --http.corsdomain "*" \
+--http.api "admin,eth,debug,miner,net,txpool,personal,web3" --syncmode full --networkid 1234 \
+--port 30300 --ws --ws.addr "192.168.0.243" --ws.port 9005 --ws.origins "*" \
+--ws.api "admin,eth,debug,miner,net,txpool,personal,web3" \
+--allow-insecure-unlock --unlock "0,1" --password "./node/password.txt" \
+
+geth --goerli --http --http.addr "192.168.0.243" --http.port 9000 --http.corsdomain "*" \
+--http.api "admin,eth,debug,miner,net,txpool,personal,web3" --syncmode full --networkid 1234 \
+--port 30300 --ws --ws.addr "192.168.0.243" --ws.port 9005 --ws.origins "*" \
+--ws.api "admin,eth,debug,miner,net,txpool,personal,web3" \
+--allow-insecure-unlock --unlock "0,1" --password "./node/password.txt" \
+*/
     return (
         <>
             <Routes>

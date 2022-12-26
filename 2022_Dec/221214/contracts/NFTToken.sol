@@ -18,6 +18,8 @@ contract NFTToken is ERC721Enumerable, Ownable {
 
     string public metadataURI;
 
+    // 배포시 NFT의 생성 규격을 정의
+    // constructor는 배포시에 하는 그런그런거
     constructor(
         string memory _name,
         string memory _symbol,
@@ -54,7 +56,7 @@ contract NFTToken is ERC721Enumerable, Ownable {
         TokenDatas[tokenId] = random;
 
         // 랜덤으로 생성한 Rank와 Type을 가진 Token의 갯수가 몇개인지 확인하기 위한 상태 변수
-        tokenCount[TokenDatas[tokenId].Rank - 1][
+        tokenCount[ TokenDatas[tokenId].Rank - 1][
             TokenDatas[tokenId].Type - 1
         ] += 1;
 
